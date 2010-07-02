@@ -264,11 +264,13 @@ class Contacto(models.Model):
                 d.save()
 
     @staticmethod
-    def importar(user, args):
+    def importar(user, args, channel = False):
         file = args['file']
-        type = args['type']
+        tipo = args['type']
+        if channel and 'channel' in args:
+            channel = args['channel']
         info = file.read()
-        parser = TIPOS_PARSERS[int(type)](user)
+        parser = TIPOS_PARSERS[int(tipo)](user, channel)
         return parser.parse(info)
 
     @staticmethod

@@ -55,6 +55,7 @@ def actionMenu(request):
     list = appendMenu(m, _('Import/Export'), reverse('importar_agenda'))
     appendSubmenu(m, list, _('Import'), reverse('importar_agenda'))
     appendSubmenu(m, list, _('Export'), reverse('exportar_agenda'))
+    appendSubmenu(m, list, _('Import to channel'), reverse('importar_canal')),
     return m
 
 @login_required
@@ -74,18 +75,24 @@ def lista_contactos(request):
     return render_to_response('addressbook/listar_contactos.html',context, rc)
 
 @login_required
-def importar(request):
+def importar(request, channel = False):
     rc = RequestContext(request)
     context = {'profile': request.session['profile'] }
+    rev = reverse('importar_agenda')
+    if channel:
+        rev = reverse('importar_canal')
     context['crumbs'] = ( ( _('Home') , reverse('root') ),
-                          ( _('Import') , reverse('importar_agenda') ),
+                          ( _('Import') , rev ),
                         )
     info(request, 'importar', 'Import process')
     setLeftMenu(request, actionMenu(request), _(u'Database actions'))
     if request.method == "POST":
-        form = FileDirForm(request.POST, request.FILES)
+        if channel:
+            form = ChannelFileDirForm(request.POST, request.FILES)
+        else:
+            form = FileDirForm(request.POST, request.FILES)
         if form.is_valid():
-            result = Contacto.importar(request.user, form.cleaned_data)
+            result = Contacto.importar(request.user, form.cleaned_data, channel)
             if result:
                 context['msg'] = _(u'Import process done. Total new contacts: %d' % result)
             else:
@@ -93,7 +100,10 @@ def importar(request):
         else:
             context['form'] = form
     if not 'form' in context:
-        context['form'] = FileDirForm()
+        if channel:
+            context['form'] = ChannelFileDirForm()
+        else:
+            context['form'] = FileDirForm()
     context['label'] = _(u'Import')
     return render_to_response('addressbook/importar.html', context, rc) 
 

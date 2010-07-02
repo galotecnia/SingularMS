@@ -22,6 +22,7 @@
 #######################################################################
 
 from addressbook.constants import *
+from mt.models import Channel, Subscriber
 import logging
 
 log = logging.getLogger('galotecnia')
@@ -30,7 +31,7 @@ HEADER = '"nombre", "apellidos", "tratamiento", "dom_casa_1", "pob_casa_1", "pro
 
 class csv:
 
-    def __init__(self, user, text = "", *args, **kwargs):
+    def __init__(self, user, channel = None, text = "", *args, **kwargs):
         """
             User needed (contact will be added to him), optional text with contacts
         """
@@ -39,6 +40,7 @@ class csv:
         self.index = 0
         self.contacto = -1
         self.total = 0
+        self.channel = channel
 
 ######################################## IMPORT #######################################
 
@@ -53,26 +55,28 @@ class csv:
         from addressbook.models import Contacto
         self.index = 0
         nombre, apellidos = self.get_datos(linea, 2)
-        tratamiento = TRATAMIENTO_INV[self.get_datos(linea)]
-        self.contacto, self.created = Contacto.objects.get_or_create(nombre = nombre, apellidos = apellidos, tratamiento = tratamiento, usuario = self.user)
+        self.contacto, self.created = Contacto.objects.get_or_create(nombre = nombre, apellidos = apellidos, usuario = self.user)
+        if self.channel:
+            if self.contacto.tlf_movil():
+                Subscriber.create(self.contacto.tlf_movil(), self.channel.id, nombre)
         self.parse_data(linea)
         self.total += 1
 
     def get_datos(self, datos, num = 1):
         out = []
         for i in range(num):
-            aux_index = datos.find('"', index) + 1
+            aux_index = datos.find('"', self.index) + 1
             self.index = datos.find('"', aux_index) + 1
-            out.append(datos[aux_index:index-1])
+            out.append(datos[aux_index:self.index-1])
         if num == 1:
             return out[0]
         return out   
     
-    def parse_data(linea):
+    def parse_data(self, linea):
         for tipo in LISTA_DIR_IMP_CSV:
             domicilio, poblacion, provincia, postal, pais = self.get_datos(linea, 5)
             if domicilio or poblacion or provincia or postal or pais:
-                self.contacto.create_dir(domicilio, poblacion, provincia, postal, pais)
+                self.contacto.create_dir(tipo, domicilio, postal, poblacion, provincia, pais)
         for clase in LISTA_DATOS_IMP_CSV:
             dato = self.get_datos(linea)
             if dato:

@@ -121,6 +121,10 @@ OPCIONES_IMPORTACION = (
     (CSV, _(u'CSV')),
 )
 
+OPCIONES_IMPORTACION_CHANNEL = (
+    (CSV, _(u'CSV')),
+)
+
 TIPOS_RESPUESTA = {
     VCARD21: 'text/x-vcard',
     VCARD3 : 'text/x-vcard',

@@ -68,7 +68,7 @@ DATOS_EXTRA = {
 
 class vcard21:
 
-    def __init__(self, user, text = "", *args, **kwargs):
+    def __init__(self, user, channel = None, text = "", *args, **kwargs):
         """
             User needed (contacts will be added to him), and optional text with contacts
         """

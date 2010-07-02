@@ -24,6 +24,7 @@
 from django.forms import ModelForm
 from django import forms
 from models import *
+from mt.models import Channel
 from django.utils.translation import ugettext_lazy as _
 from django.contrib.admin.widgets import AdminDateWidget
 from django.conf import settings
@@ -93,7 +94,14 @@ class FileDirForm(FileTypeForm):
 
     file = forms.FileField(label=_(u'Import file'))
 
-            
+class ChannelFileDirForm(FileDirForm):
+    
+    channel = forms.ModelChoiceField(queryset = Channel.objects.filter(active = True), empty_label=None)
+
+    def __init__(self, *args, **kwargs):
+        super(ChannelFileDirForm, self).__init__(*args, **kwargs)
+        self.fields['type'].choices = OPCIONES_IMPORTACION_CHANNEL
+          
 class DynamicForm(forms.Form):
     """
        Dynamic form

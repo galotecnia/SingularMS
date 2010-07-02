@@ -34,4 +34,5 @@ urlpatterns = patterns('addressbook.views',
     # Import/Export
     url(r'^import/$',                       'importar', name='importar_agenda'),
     url(r'^export/$',                       'exportar', name='exportar_agenda'),
+    url(r'^import/channel/$',               'importar', {'channel': True}, name='importar_canal'),
 )
