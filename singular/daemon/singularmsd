@@ -1,7 +1,0 @@
-#!/bin/sh
-
-. /opt/pinax-env/bin/activate
-WD=$(pwd)
-export PYTHONPATH=$WD/../web:$WD/../web/apps
-export DJANGO_SETTINGS_MODULE=settings
-python singularmsd.py $* -p tmp.pid -l singularmsd.log
