@@ -1,0 +1,15 @@
+From: 683455456
+From_TOA: 81 unknown, ISDN/telephone
+From_SMSC: 34609090909
+Sent: 09-03-30 18:19:50
+Received: 09-03-30 17:24:38
+Subject: GSM1
+IMSI: 214075509322355
+Report: no
+Alphabet: ISO
+Length: 118
+
+SMS STATUS REPORT
+Message_id: 21
+Discharge_timestamp: 09-03-30 18:24:33
+Status: 0,Ok,short message received by the SME

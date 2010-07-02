@@ -1,0 +1,88 @@
+[
+    {
+        "pk": 1, 
+        "model": "auth.user", 
+        "fields": {
+            "username": "administrador galotecnia", 
+            "first_name": "", 
+            "last_name": "", 
+            "is_active": true, 
+            "is_superuser": true, 
+            "is_staff": true, 
+            "last_login": "2009-06-16 18:12:51", 
+            "groups": [], 
+            "user_permissions": [], 
+            "password": "sha1$63779$7f217930f2f20cc36444154ceb0c406347b8a550", 
+            "email": "admin@galotecnia.es", 
+            "date_joined": "2009-04-22 15:06:46"
+        }
+    }, 
+    {
+        "pk": 2, 
+        "model": "auth.user", 
+        "fields": {
+            "username": "galotecnia", 
+            "first_name": "", 
+            "last_name": "", 
+            "is_active": true, 
+            "is_superuser": false, 
+            "is_staff": false, 
+            "last_login": "2009-06-16 18:27:06", 
+            "groups": [], 
+            "user_permissions": [], 
+            "password": "sha1$d41cd$5edc556fef9cf62879bd75cf808cf5d7bdc19fee", 
+            "email": "", 
+            "date_joined": "2009-04-22 15:10:34"
+        }
+    },
+    {
+        "pk": 3, 
+        "model": "auth.user", 
+        "fields": {
+            "username": "administrador", 
+            "first_name": "", 
+            "last_name": "", 
+            "is_active": true, 
+            "is_superuser": false, 
+            "is_staff": false, 
+            "last_login": "2009-06-16 18:27:06", 
+            "groups": [], 
+            "user_permissions": [], 
+            "password": "sha1$d41cd$5edc556fef9cf62879bd75cf808cf5d7bdc19fee", 
+            "email": "", 
+            "date_joined": "2009-04-22 15:10:34"
+        }
+    },
+    {
+        "pk": 2, 
+        "model": "accounting.provider", 
+        "fields": {
+            "user_permissions": [], 
+            "groups": []
+        }
+    },
+    {
+        "pk": 3, 
+        "model": "accounting.provider", 
+        "fields": {
+            "user_permissions": [], 
+            "groups": []
+        }
+    },
+    {
+        "pk": 1, 
+        "model": "accounting.access", 
+        "fields": {
+            "description": "Dummy Access to test the application", 
+            "capabilities": [
+                1, 
+                2, 
+                3
+            ], 
+            "name": "dummy access", 
+            "provider": 2, 
+            "args1": "Dummy=Args", 
+            "backend": 0
+        }
+    }  
+]

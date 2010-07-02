@@ -1,0 +1,319 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% comment %}
+
+#######################################################################
+#  SingularMS version 1.0                                             #
+#######################################################################
+#  This file is a part of SingularMS.                                 #
+#                                                                     #
+#  SingularMs is free software; you can copy, modify, and distribute  #
+#  it under the terms of the GNU Affero General Public License        #
+#  Version 1.0, 21 May 2007.                                          #
+#                                                                     #
+#  SingularMS is distributed in the hope that it will be useful, but  #
+#  WITHOUT ANY WARRANTY; without even the implied warranty of         #
+#  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.               #
+#  See the GNU Affero General Public License for more details.        #
+#                                                                     #
+#  You should have received a copy of the GNU Affero General Public   #
+#  License with this program; if not, contact Galotecnia              #
+#  at contacto[AT]galotecnia[DOT]org. If you have questions about the #
+#  GNU Affero General Public License see "Frequently Asked Questions" #
+#  at http://www.gnu.org/licenses/gpl-faq.html                        #
+#######################################################################
+
+{% endcomment %}
+
+{% block layout %}
+    
+
+  <link rel="stylesheet" type="text/css" media="screen,projection,print" href="{{ MEDIA_URL }}/css/layout1_setup.css" />
+  {% comment %}
+  <link rel="stylesheet" type="text/css" media="screen,projection,print" href="{{ MEDIA_URL }}/css/layout1_text.css" />
+{% endcomment %}
+<link rel='stylesheet' type='text/css' href="{{MEDIA_URL}}/css/smoothness/jquery-ui-1.7.2.custom.css" />
+<link rel="styleheet" type="text/css"  href="{{MEDIA_URL }}/css/timepicker_plug/css/style.css" />
+<link rel='stylesheet' type='text/css' href="{{MEDIA_URL}}/css/jMonthCalendar.css" />
+<style type="text/css">
+		body { font-size: 62.5%; }
+		label, input { display:block; }
+		input.text { margin-bottom:12px; width:95%; padding: .4em; }
+		fieldset { padding:0; border:0; margin-top:25px; }
+		h1 { font-size: 1.2em; margin: .6em 0; }
+		div#users-contain {  width: 350px; margin: 20px 0; }
+		div#users-contain table { margin: 1em 0; border-collapse: collapse; width: 100%; }
+		div#users-contain table td, div#users-contain table th { border: 1px solid #eee; padding: .6em 10px; text-align: left; }
+		.ui-button { outline: 0; margin:0; padding: .4em 1em .5em; text-decoration:none; cursor:pointer; position: relative; text-align: center; }
+		.ui-dialog .ui-state-highlight, .ui-dialog .ui-state-error { padding: .3em;  }
+
+
+
+</style>
+
+{% endblock %}
+
+{% block breadcrumbs %}
+{% endblock %}
+
+{% block leftmenu%}
+{% endblock %}
+
+{%block jscript %}
+
+    {% include "jqueryui_loader.html" %}
+    <script type="text/javascript" src="{{MEDIA_URL}}/javascript/date-en-GB.js"></script>
+    <script src="{{MEDIA_URL}}/jquery/ui/timepicker_plug/timepicker.js" type="text/javascript"></script>
+    <script type="text/javascript" src="{{MEDIA_URL}}/javascript/jMonthCalendar/jMonthCalendar.js"></script>
+    <script src="{{MEDIA_URL}}/jquery/ui/i18n/ui.datepicker-es.js" type="text/javascript"></script>
+{% endblock %}
+
+{% block jquerycode %}
+<script>
+   
+    
+	$(document).ready(function() {
+        var monthNames = [ "{% trans 'January' %}",
+                                      "{% trans 'February' %}",
+                                      "{% trans 'March' %}",
+                                      "{% trans 'April' %}",
+                                      "{% trans 'May' %}",
+                                      "{% trans 'June' %}",
+                                      "{% trans 'July' %}",
+                                      "{% trans 'August' %}",
+                                      "{% trans 'September' %}",
+                                      "{% trans 'October' %}",
+                                      "{% trans 'November' %}",
+                                      "{% trans 'December' %}"
+                                    ];
+        var dayNames = [
+                                    "{% trans 'Sunday' %}",
+                                    "{% trans 'Monday' %}",
+                                    "{% trans 'Tuesday' %}",
+                                    "{% trans 'Wednesday' %}",
+                                    "{% trans 'Thursday' %}",
+                                    "{% trans 'Friday' %}",
+                                    "{% trans 'Saturday' %}"
+                                  ];
+        var monthAbbrevs = [
+                                        "{% trans 'Jan' %}",
+                                        "{% trans 'Feb' %}",
+                                        "{% trans 'Mar' %}",
+                                        "{% trans 'Apr' %}",
+                                        "{% trans 'May' %}",
+                                        "{% trans 'Jun' %}",
+                                        "{% trans 'Jul' %}",
+                                        "{% trans 'Aug' %}",
+                                        "{% trans 'Sep' %}",
+                                        "{% trans 'Oct' %}",
+                                        "{% trans 'Nov' %}",
+                                        "{% trans 'Dec' %}"
+                                      ];
+        var dayAbbrevs = [
+                                        "{% trans 'Su' %}",
+                                        "{% trans 'Mo' %}",
+                                        "{% trans 'Tu' %}",
+                                        "{% trans 'We' %}",
+                                        "{% trans 'Th' %}",
+                                        "{% trans 'Fr' %}",
+                                        "{% trans 'Sa' %}"
+                                    ];
+		$("#dialog").hide();
+		$.ajaxSetup({async:false});
+        $('#startDate').datetime({
+									userLang	: "{% trans 'en' %}"
+								});
+        $('#endDate').datetime({
+									userLang	: "{% trans 'en' %}"
+								});
+		$.getJSON("{%url ajaxGetReplyCommand %}",prepare);
+        var create_buttons = {
+                               "{% trans 'Create an reply command' %}": createRC,
+                               "{% trans 'Cancel'%}": cancelForm,
+                               "{% trans 'Close' %}": closeForm
+        };
+        var update_buttons = {
+                               "{% trans 'Update reply command' %}": updateRC,
+                               "{% trans 'Cancel'%}": cancelForm,
+                               "{% trans 'Close' %}": closeForm
+        };
+		$("#dialog").dialog({
+                             close: clearForm,
+                             open: function() {
+                                        $("#pickerplug").css("z-index",
+                                        $(this).parents(".ui-dialog").css("z-index")+1);
+
+                                },
+                             bgiframe: false,
+                             autoOpen: false,
+                             height: 300,
+                             modal: true,
+                             buttons: create_buttons
+                            });
+		
+		function prepare(json){
+            var events = [];
+            var options = {
+                            firstDayOfWeek: 0,
+                            locale: {
+                                        days: dayNames ,
+                                        daysShort: ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"],
+                                        daysMin: dayAbbrevs,
+                                        months: monthNames,
+                                        monthsShort: monthAbbrevs,
+                                        weekMin: 'wk'
+                                    },
+                            onDayCellClick: function(date){
+                                                var day = date;
+                                                alert(date.toGMTString());
+                                                if (Date.today().compareTo(date)!=1){
+                                                    day = Date.parse(date.toGMTString()).toString("yyyy-MM-dd HH:mm:ss");
+                                                    $('#dialog').dialog('option','buttons',create_buttons);
+                                                    $("#startDate").val(day);
+                                                    $("#endDate").val(day);
+                                                    $('#dialog').dialog('open');
+                                                }
+                                                return true;
+                                            },
+            };
+            $.each(json,function(ev){
+                var startTime = Date.parse(this.start);
+                var endTime = Date.parse(this.end);
+                var titleEv = this.title;
+                if (Date.today().compareTo(startTime)==1){
+                    events.push({EventID:this.id,StartDateTime:startTime,EndDateTime:endTime,Title:titleEv,draggable:false});
+                }else{
+                    events.push({EventID:this.id,StartDateTime:startTime,EndDateTime:endTime,Title:titleEv});
+                }
+            });
+            create_calendar(options,events);
+        }
+        function create_calendar(options,events){
+            $.jMonthCalendar.Initialize(options, events);
+            /*$('#calendar').fullCalendar({
+                weekStart: 1,
+                draggable: true,
+                events: events,
+                timeFormat:"H:i",
+                showTime: true,
+                buttons: {
+                            today: "{% trans 'Today' %}",
+                            prevYear: false,
+                            prevMonth: true,
+                            nextMonth: true,
+                            nextYear: false
+                },
+                eventDrop: function(event, delta) {
+                    var startTime = Date.parse(event.start.toGMTString()).toString("yyyy-MM-dd HH:mm:ss");
+                    var endTime = Date.parse(event.end.toGMTString()).toString("yyyy-MM-dd HH:mm:ss");
+                    if (Date.today().compareTo(event.start)!=1){
+                        var ev = {
+                                    id: event.id,
+                                    start: startTime,
+                                    end: endTime,
+                                    title: event.title
+                                };
+                        $.getJSON("{%url ajaxUpdateRC %}", ev);
+                    }else{
+                        startTime = Date.parse(event.start.toGMTString()).add(delta*-1).days().toString("yyyy-MM-dd HH:mm:ss");
+                        endTime = Date.parse(event.end.toGMTString()).add(delta*-1).days().toString("yyyy-MM-dd HH:mm:ss");
+                        var ev = {
+                                    id: event.id,
+                                    start: startTime,
+                                    end: endTime,
+                                    title: event.title
+                                };
+                        $.getJSON("{%url ajaxUpdateRC %}", ev,validate);
+                    }
+                },
+                dayClick: function(dayDate){
+                    var day = dayDate;
+                    if (Date.today().compareTo(dayDate)!=1){
+                        day = Date.parse(dayDate.toGMTString()).toString("yyyy-MM-dd HH:mm:ss");
+                        $('#dialog').dialog('option','buttons',create_buttons);
+                        $("#startDate").val(day);
+                        $("#endDate").val(day);
+                        $('#dialog').dialog('open');
+                    }
+                },
+                eventClick: function(calEvent, jsEvent){
+                    var start = calEvent.start;
+                    var end = calEvent.end;
+                    if (Date.today().compareTo(start)!=1){
+                        start = Date.parse(start.toGMTString()).toString("yyyy-MM-dd HH:mm:ss");
+                        end = Date.parse(end.toGMTString()).toString("yyyy-MM-dd HH:mm:ss");
+                        $("#startDate").val(start);
+                        $("#endDate").val(end);
+                        $("#title").val(calEvent.title);
+                        $('#idID').val(calEvent.id);
+                        $('#dialog').dialog('option','buttons',update_buttons);
+                        $('#dialog').dialog('open');
+                    }
+                }
+            });*/
+        }
+        function cancelForm(){
+            closeForm();
+        }
+        function clearForm(){
+            $("#startDate").val('');
+            $("#endDate").val('');
+            $("#title").val('');
+            $("#idID").val('');
+        }
+        function closeForm(){
+            clearForm();
+            $("#dialog").dialog('close');
+        }
+        function createRC(){
+            var event = {
+                          start: $("#startDate").val(),
+                          end: $('#endDate').val(),
+                          title: $('#title').val()
+                        };
+            $.getJSON("{%url ajaxSetRC %}", event, validate);
+            closeForm();
+        }
+        function updateRC(){
+            var event = {
+                          id: $("#idID").val(),
+                          start: $("#startDate").val(),
+                          end: $('#endDate').val(),
+                          title: $('#title').val()
+                        };
+            $.getJSON("{%url ajaxUpdateRC %}", event,validate);
+
+            closeForm();
+        }
+        function validate(){
+            $("#jMonthCalendar").html('');
+            $.getJSON("{%url ajaxGetReplyCommand %}",prepare);
+        }
+	});
+
+</script>
+{% endblock %}
+
+{% block maincontent %}
+
+<div id="dialog" title="{%trans 'Create new Reply Command' %}">
+	<p id="validateTips">{% trans 'All form fields are required.' %}</p>
+
+	<form>
+	<fieldset>
+        <input type="hidden" id="idID" value=""/>
+		<label for="start">{% trans 'Start'%}</label>
+		<input type="text" name="start" id="startDate" class="text ui-widget-content ui-corner-all" />
+		<label for="end">{%trans 'End'%}</label>
+		<input type="text" name="end" id="endDate" value="" class="text ui-widget-content ui-corner-all" />
+		<label for="title">{% trans 'Title'%}</label>
+		<input type="text" name="title" id="title" value="" class="text ui-widget-content ui-corner-all" />
+	</fieldset>
+	</form>
+</div>
+<div id='jMonthCalendar'></div>
+
+{%endblock %}
+{% block rightmenu%}
+{% endblock %}

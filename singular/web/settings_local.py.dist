@@ -1,0 +1,60 @@
+#######################################################################
+#  SingularMS version 1.0                                             #
+#######################################################################
+#  This file is a part of SingularMS.                                 #
+#                                                                     #
+#  SingularMs is free software; you can copy, modify, and distribute  #
+#  it under the terms of the GNU Affero General Public License        #
+#  Version 1.0, 21 May 2007.                                          #
+#                                                                     #
+#  SingularMS is distributed in the hope that it will be useful, but  #
+#  WITHOUT ANY WARRANTY; without even the implied warranty of         #
+#  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.               #
+#  See the GNU Affero General Public License for more details.        #
+#                                                                     #
+#  You should have received a copy of the GNU Affero General Public   #
+#  License with this program; if not, contact Galotecnia              #
+#  at contacto[AT]galotecnia[DOT]org. If you have questions about the #
+#  GNU Affero General Public License see "Frequently Asked Questions" #
+#  at http://www.gnu.org/licenses/gpl-faq.html                        #
+#######################################################################
+
+import os
+ 
+PROJECT_ROOT=os.getcwd()
+SITE_LOCATION = 'localhost'
+
+PINAX_ROOT = ''
+DATABASE_ENGINE = 'sqlite3'
+DATABASE_NAME = PROJECT_ROOT + '/singular.db'
+URL_BASE='singularms/'
+MEDIA_URL = '/' + URL_BASE + 'site_media'
+MEDIA_ROOT = PROJECT_ROOT + '/media'
+
+LOGIN_URL = '/' + URL_BASE 
+#ADMIN_MEDIA_PREFIX = '/django-admin-media/'
+BEHIND_PROXY = False
+DEFAULT_DEACTIVATION_TIME = 1
+MMS_SIZE = 1024
+
+TEMPLATE_DIRS = (
+        # Put strings here, like "/home/html/django_templates" or
+        # "C:/www/django/templates".
+        # Always use forward slashes, even on Windows.
+        # Don't forget to use absolute paths, not relative paths.
+        PROJECT_ROOT + "/templates",
+)
+
+ACTIVE_ADDRESS_BOOK = False
+
+LOG_FILENAME = 'singular.log'
+
+
+SEND_MAIL_ON_EXCEPTION = True
+
+EMAIL_HOST = 'mydomain.com'
+EMAIL_SUBJECT_PREFIX = '[MY_DOMAIN TESTS] '
+FROM_EMAIL_ADDRESS = 'singularms@mydomain.com'
+EMAIL_CREDIT_LIMIT = ['touser@mydomain.com']
+
+USE_SOAPPY_CLIENT = False

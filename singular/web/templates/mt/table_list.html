@@ -1,0 +1,185 @@
+{% comment %}
+
+#######################################################################
+#  SingularMS version 1.0                                             #
+#######################################################################
+#  This file is a part of SingularMS.                                 #
+#                                                                     #
+#  SingularMs is free software; you can copy, modify, and distribute  #
+#  it under the terms of the GNU Affero General Public License        #
+#  Version 1.0, 21 May 2007.                                          #
+#                                                                     #
+#  SingularMS is distributed in the hope that it will be useful, but  #
+#  WITHOUT ANY WARRANTY; without even the implied warranty of         #
+#  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.               #
+#  See the GNU Affero General Public License for more details.        #
+#                                                                     #
+#  You should have received a copy of the GNU Affero General Public   #
+#  License with this program; if not, contact Galotecnia              #
+#  at contacto[AT]galotecnia[DOT]org. If you have questions about the #
+#  GNU Affero General Public License see "Frequently Asked Questions" #
+#  at http://www.gnu.org/licenses/gpl-faq.html                        #
+#######################################################################
+
+{% endcomment %}
+
+
+{% load i18n pagination_tags %}
+{% if data %}
+            {% autopaginate data %}
+            {%paginate %}
+            <table>
+                <tbody>
+                    <tr> 
+                    {% ifequal type "Individual" %}
+                        <th class="top" scope="col" width=12px style="background-color:#FFFFFF"></th>
+                        <th class="top" scope="col" >{% trans "Phone" %}</th>
+                        <th class="top" scope="col" >{% trans "Account" %}</th>
+                    {% else %}
+                        <th class="top" scope="col" >{% trans "Phones nº" %}</th>
+                        <th class="top" scope="col" >{% trans "Channel" %}</th>
+                    {% endifequal %}
+                    <th class="top" scope="col" >{% trans "Access" %}</th>
+                    <th class="top" scope="col" width="30px">{% trans "MMS" %}</th>
+                    <th class="top" scope="col" >{% trans "Creation date" %}</th>
+                    {% ifequal type "Individual" %}
+                        <th class="top" scope="col" >{% trans "Status" %}</th>
+                    {% else %}
+                        <th class="top" scope="col" >{% trans "Stadistics" %}</th>
+                    {% endifequal %}
+                    </tr>
+                    {% for object in data %}
+                        <tr>
+                            {% ifequal type "Individual" %}
+                                <th scope="row">
+                                    {% if object.responsemessage_set.count %}
+                                        {% if object.response_left %}
+                                            <a class="idMsg" id="{{ object.id }}"><img id="{{object.id}}_image" alt="{% trans 'New response messages'  %}" src="{{MEDIA_URL}}/img/newmsg.png" style="border:none" /></a>
+                                        {% else %}
+                                            <a class="idMsg" id="{{ object.id }}"><img id="{{object.id}}_image" alt="{% trans 'Old response messages'  %}" src="{{MEDIA_URL}}/img/replies.png" style="border:none" /></a>
+                                        {% endif %}
+                                    {% endif %}
+                                </th>
+                                <th scope="row">
+                                    <a class="idMsg" id="{{object.id}}">{{ object.mobile_formated }}</a>
+                                </th>
+                                <th>{{ object.account.name }}</th>
+                            {% else %}
+                                <th scope="row"><a class="idMsg" id="{{object.id}}">{{ object.num_of_phones }}</a></th>
+                                <th>{{ object.get_channel }}</th> 
+                            {% endifequal %}
+                            <td>{{ object.account.access.name }}</td>
+                            <td>{% if object.body.mms %}
+                                    Yes
+                                {% else %}
+                                    No
+                                {% endif %}
+                            </td>
+                            <td>{{ object.creationDate|date:"d-m-Y H:i:s"}}</td>
+                            <td>
+                            {% if object.processed %}
+                                {% ifequal object.status.0 0 %}
+                                    {% if object.status.1 %} 
+                                        <a href="{% url message_status object.channelmessage_set.all.0.id %}">{{ object.status.1 }}</a>
+                                    {% else %}
+                                        <img alt="{% trans "Unknown" %}" src="{{MEDIA_URL}}/img/status.png"/>   
+                                    {% endif %}
+                                {% else %}
+                                    {% ifequal object.status.0 1 %}
+                                        <img alt="{% trans "Sent" %}" src="{{MEDIA_URL}}/img/true.png"/>
+                                        {% ifequal object.status.1 1 %}
+                                            <img alt="{% trans "Sent" %}" src="{{MEDIA_URL}}/img/true.png"/>
+                                        {%else %}
+                                            {% ifequal object.status.1 2 %}
+                                                <img alt="{% trans "Error" %}" src="{{MEDIA_URL}}/img/false.png" title="{{ object.get_error }}"/> 
+                                            {% else %}
+                                                    <img alt="{% trans "Sending" %}" src="{{MEDIA_URL}}/img/sending.jpg"/>    
+                                            {% endifequal %}
+                                        {% endifequal %}
+                                    {%else %}
+                                        {% ifequal object.status.0 2 %}
+                                            <img alt="{% trans "Error" %}" src="{{MEDIA_URL}}/img/false.png" title="{{ object.get_error }}"/> 
+                                        {% else %}
+                                            {% ifequal object.status.0 3 %}
+                                                <img alt="{% trans "Sending" %}" src="{{MEDIA_URL}}/img/sending.jpg"/>    
+                                            {% endifequal %}
+                                        {% endifequal %}
+                                    {% endifequal %}
+                                {% endifequal %}
+                            {% else %}
+                                <img alt="{% trans 'Not processed' %}" src="{{MEDIA_URL}}/img/notproc.png"/>
+                                {% if object.can_be_del %}
+                                    <a href="{% url deletemessage type object.id%}">
+                                        <img alt="{% trans 'Delete Message' %}" src="{{MEDIA_URL}}/img/editdelete.png"/>
+                                    </a> 
+                                {% endif %}
+                            {% endif %}
+                            </td>
+                        </tr>
+                        <tr>
+							{% if object.body.mms %}
+                               	<td id="{{object.id}}_body" class="hideMsg">{{object.body}}</td>
+                                <td id="{{object.id}}_file" class="hideMsg" colspan=5>
+								{% for attachment in  object.body.attachment_set.all %}
+                                    <a href="{{MEDIA_URL}}/{{ attachment.file.url }}">{{ attachment.filename }}</a>
+                               	{% endfor %}
+                                </td>
+							{% else %}
+                                {% ifequal type "Individual" %}
+								    <td colspan=7 id="{{object.id}}_body" class="hideMsg">{{object.body}}</td>
+                                {% else %}
+								    <td colspan=6 id="{{object.id}}_body" class="hideMsg">{{object.body}}</td>
+                                {% endifequal %}
+							{% endif %}
+                        </tr>
+                        {% if object.responsemessage_set.count %}
+                            <tr><td colspan=7 id="{{ object.id }}_response" class="hideMsg">
+                            {% for response in object.response_messages %}
+                                <p style="font-size:100%">{% if not response.read %}<b>{% endif %}
+                                    {{ response.receivedDate }} - {{ response.body }}
+                                {% if not response.read %}</b>{% endif %}</p>
+                            {% endfor %}
+                            </td></tr>
+                        {% endif %}
+                    {% endfor %}
+                </tbody>
+            </table>
+        {% ifequal type "Individual" %}
+            <div class="column1-unit">
+            <h2 align="center">{% trans "Leyend" %}</h2>
+            <table>
+            <tr>
+                <th>{% trans "Sending" %}</th><th><img alt="{% trans "Sending" %}" src="{{MEDIA_URL}}/img/sending.jpg" align="right"/></th>
+                <th>{% trans "Error" %}</th><th><img alt="{% trans "Error" %}" src="{{MEDIA_URL}}/img/false.png" align="right"/></th>
+            </tr>
+            <tr>
+                <th>{% trans "OK" %}</th><th><img alt="{% trans "OK" %}" src="{{MEDIA_URL}}/img/true.png" align="right"/></th>
+                <th>{% trans "Unknown" %}</th><th><img alt="{% trans "Unknown" %}" src="{{MEDIA_URL}}/img/status.png" align="right"/></th>
+            </tr>
+            <tr>
+                <th>{% trans "Not Processed" %}</th><th><img alt="{% trans "Not processed" %}" src="{{MEDIA_URL}}/img/notproc.png" align="right"/></th>
+                <th>{% trans "Remove" %}</th><th><img alt="{% trans "Remove" %}" src="{{MEDIA_URL}}/img/editdelete.png" align="right"/></th>
+            </tr>
+            <tr>
+                <th colspan=2>{% trans "First column status = Local Server" %}</th>
+                <th colspan=2>{% trans "Second column status = Access Server" %}</th>
+            </tr>
+            </table>
+            </div>
+        {% endifequal %}
+{% else %}
+        <h1 class="block">{% trans "Messages not found" %}</h1> 
+        <div class="column1-unit">
+            <h1>{% trans "Messages not found" %}</h1>
+       
+            <p>
+            {% blocktrans %}
+                Error: SingularMS didn't found the objects that you have
+                requested, please contact with your system administrator.
+            {% endblocktrans %}
+
+            </p>
+        
+        </div>
+       
+{% endif %} 

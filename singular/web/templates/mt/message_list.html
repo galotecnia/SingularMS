@@ -1,0 +1,208 @@
+{% extends "base.html" %}
+
+{% comment %}
+
+#######################################################################
+#  SingularMS version 1.0                                             #
+#######################################################################
+#  This file is a part of SingularMS.                                 #
+#                                                                     #
+#  SingularMs is free software; you can copy, modify, and distribute  #
+#  it under the terms of the GNU Affero General Public License        #
+#  Version 1.0, 21 May 2007.                                          #
+#                                                                     #
+#  SingularMS is distributed in the hope that it will be useful, but  #
+#  WITHOUT ANY WARRANTY; without even the implied warranty of         #
+#  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.               #
+#  See the GNU Affero General Public License for more details.        #
+#                                                                     #
+#  You should have received a copy of the GNU Affero General Public   #
+#  License with this program; if not, contact Galotecnia              #
+#  at contacto[AT]galotecnia[DOT]org. If you have questions about the #
+#  GNU Affero General Public License see "Frequently Asked Questions" #
+#  at http://www.gnu.org/licenses/gpl-faq.html                        #
+#######################################################################
+
+{% endcomment %}
+
+{% load i18n display_form%}
+
+{% block layout %}
+<link rel="stylesheet" type="text/css" media="screen,projection,print" href="{{ MEDIA_URL }}/css/layout2_setup.css" />
+<link rel="stylesheet" type="text/css" media="screen,projection,print" href="{{ MEDIA_URL }}/css/layout2_text.css" />
+<link rel="stylesheet" type="text/css" href="{{ MEDIA_URL }}/css/smoothness/jquery-ui-1.7.2.custom.css" />
+<link rel="stylesheet" type="text/css" href="{{ MEDIA_URL }}/css/timepicker_plug/css/style.css" />
+{% endblock %}
+
+{%block jscript %}
+    {% include "jqueryui_loader.html" %}
+    {% include "jquery_plugin_form.html"%}
+    <script src="{{ MEDIA_URL }}/jquery/ui/timepicker_plug/timepicker.js" type="text/javascript"></script>
+    <script src="{{ MEDIA_URL }}/jquery/ui/i18n/ui.datepicker-es.js" type="text/javascript"></script>
+    <script type="text/javascript" src="{{MEDIA_URL}}/javascript/date-en-GB.js"></script>
+    <script type="text/javascript" src="{{MEDIA_URL}}/jquery/jquery-validate/jquery.validate.js"></script>
+    <script type="text/javascript" src="{{MEDIA_URL}}/jquery/jquery.metadata.js"></script>
+{% endblock %}
+{% block jquerycode %}
+<script>
+    $(document).ready(function(){
+        $.ajaxSetup({async:false});
+        var filter = '';
+        var form_empty = false;
+        $("#filter_list").hide();
+        $("#filterLink").click(function(){
+            $('#filter_list').resetForm();
+            $("#filter_list").toggle();
+            if (form_empty!=false){
+                $('#id_formFilter').html(form_empty);
+                form_empty = false;
+            }
+        });
+        var options = {
+            "target" : "#results",
+			"dataType" : "json",
+			"success": onReloadList
+		};
+        jQuery.validator.addMethod("datetime",checkDatetime,"{% trans 'Not valid datetime format' %}");
+        jQuery.validator.addMethod("phoneNum",checkPhoneNumber,"{% trans 'Not valid phone number' %}");
+        $("#id_formFilter").validate({
+            rules:{
+                status:{
+                        required: false
+                },
+                mobile: {
+                    required:false,
+                    phoneNum:true
+                },
+                mms: {
+                    required:false
+                },
+                initDate: {
+                    required:false,
+                    datetime:true
+                },
+                endDate: {
+                    required:false,
+                    datetime:true
+                },
+            }
+        }
+        );
+         $('#id_formFilter').submit(function() {
+            // inside event callbacks 'this' is the DOM element so we first
+            // wrap it in a jQuery object and then invoke ajaxSubmit
+            if ($(this).validate().form()){
+                $(this).ajaxSubmit(options);
+            }
+
+            // !!! Important !!!
+            // always return false to prevent standard browser submit and page navigation
+            return false;
+        });
+
+        $('#results').html('&nbsp;').load('{%url ajaxFilter type%}?filter='+filter);
+        $('.idMsg').live("click",topDownInfo);
+        $('.page').live('click',onPageClick);
+        $('.prev').live('click',onPageShiftClick);
+        $('.next').live('click',onPageShiftClick);
+        onUpdateLinks();
+
+        $('#id_initDate').datetime({
+                  userLang: 'es'
+        });
+        $("#id_endDate").datetime({
+                  userLang: 'es'
+        });
+
+        function onReloadList(json){
+            if (json.result == true){
+                filter = json.filter;
+                $('#results').html('&nbsp;').load('{%url ajaxFilter type%}?filter='+filter);
+                onUpdateLinks();
+                if (form_empty!=false){
+                    $('#id_formFilter').html(form_empty);
+                    form_empty = false;
+                }
+            }else{
+                if (json.ajax == true){
+                    if (form_empty == false){
+                        form_empty = $("#id_formFilter").html();
+                    }
+                    $('#id_formFilter').html(json.errors+
+                        "<p><input type=\"submit\" name=\"submit\" id=\"submit\" class=\"button\" value=\"{%trans 'Filter'%}\" /></p>");
+                }
+            }
+        }
+
+        function topDownInfo(){
+            var id = $(this).attr('id');
+            $('#'+id+'_image').removeAttr('src');
+            $('#'+id+'_image').attr('src', "{{MEDIA_URL}}/img/replies.png");
+            $('#'+id+'_body').toggle();
+            $('#'+id+'_file').toggle();
+            $('#'+id+'_response').toggle();
+            $('#'+id+'_image').html('&nbsp;').load('{% url read_message_responses %}' + id + '/');
+        }
+        function onUpdateLinks(){
+            $('.page').attr("href","#");
+            $('.prev').attr("href","#");
+            $('.next').attr("href","#");
+        }
+        function onPageClick(){
+            $('#results').html('&nbsp;').load('{%url ajaxFilter type%}?page='+$(this).html()+'&filter='+filter);
+            onUpdateLinks();
+            
+        }
+        function onPageShiftClick(){
+            var page = parseInt($("span[class=current page]").html());
+            if($(this).attr('class')=='next'){
+                page = page+1;
+            }else{
+                page = page-1;
+            }
+            
+            $('#results').html('&nbsp;').load('{%url ajaxFilter type%}?page='+page+'&filter='+filter);
+            onUpdateLinks();
+        }
+        function checkDatetime(value, element){
+            if (value==''){
+                return this.optional(element);
+            }
+            var dat = Date.parseExact(value, "yyyy-MM-dd HH:mm:ss");
+            if (dat){
+                return true;
+            }else{
+                return false;
+            }
+        }
+        function checkPhoneNumber(value,element){
+            if (value==''){
+                return this.optional(element);
+            }
+            return value.match(/\+?([0-9]+)/);
+        }
+    });
+</script>
+{% endblock %}
+
+{% block maincontent %}
+    <h1 class="pagetitle">{% trans "Message List" %}</h1>
+        <a href="#" id="filterLink">{%trans "Advance Filter"%}</a>
+        <div class="contactform" id="filter_list">
+            <form enctype="multipart/form-data" method="POST" action="{%url ajaxGenFilter type%}" id="id_formFilter">
+                <fieldset><legend>&nbsp;{% trans 'Message Filter' %}&nbsp;</legend>
+                {% display_form filterForm %}
+                <p><input type="submit" name="submit" id="submit" class="button" value="{%trans 'Filter'%}" /></p>
+                </fieldset>
+            </form>
+        </div>
+        <h1 class="block">{% trans "Select a message" %}</h1>   
+        <div class="column1-unit">
+            <h1>{% trans "Available messages" %}</h1>
+            <table>
+                    <div id="results"><p>Dummy</p></div>
+            </table>
+
+        </div>
+
+{% endblock %}

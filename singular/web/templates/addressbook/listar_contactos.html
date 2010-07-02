@@ -1,0 +1,143 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% comment %}
+
+#######################################################################
+#  SingularMS version 1.0                                             #
+#######################################################################
+#  This file is a part of SingularMS.                                 #
+#                                                                     #
+#  SingularMs is free software; you can copy, modify, and distribute  #
+#  it under the terms of the GNU Affero General Public License        #
+#  Version 1.0, 21 May 2007.                                          #
+#                                                                     #
+#  SingularMS is distributed in the hope that it will be useful, but  #
+#  WITHOUT ANY WARRANTY; without even the implied warranty of         #
+#  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.               #
+#  See the GNU Affero General Public License for more details.        #
+#                                                                     #
+#  You should have received a copy of the GNU Affero General Public   #
+#  License with this program; if not, contact Galotecnia              #
+#  at contacto[AT]galotecnia[DOT]org. If you have questions about the #
+#  GNU Affero General Public License see "Frequently Asked Questions" #
+#  at http://www.gnu.org/licenses/gpl-faq.html                        #
+#######################################################################
+
+{% endcomment %}
+
+{% block layout %}
+    <link rel="stylesheet" type="text/css" media="screen,projection,print" href="{{ MEDIA_URL }}/css/layout2_setup.css" />
+    <link rel="stylesheet" type="text/css" media="screen,projection,print" href="{{ MEDIA_URL }}/css/layout2_text.css" />
+<link rel="stylesheet" type="text/css" href="{{ MEDIA_URL }}/css/timepicker_plug/css/style.css" />
+<link rel="stylesheet" type="text/css" href="{{ MEDIA_URL }}/css/smoothness/jquery-ui-1.7.2.custom.css" />
+{% endblock %}
+
+{% block jscript %}
+
+{% include "jqueryui_loader.html" %}
+<script src="{{ MEDIA_URL }}/jquery/ui/timepicker_plug/timepicker.js" type="text/javascript"></script>
+<script src="{{ MEDIA_URL }}/jquery/ui/i18n/ui.datepicker-es.js" type="text/javascript"></script>
+<script src="{{ MEDIA_URL }}/jquery/jquery.strings.js" type="text/javascript"></script>
+<script src="{{ MEDIA_URL }}/jquery/jquery.tagger.js" type="text/javascript"></script>
+{% include "jquery_plugin_form.html"%}
+{% endblock %}
+
+{% block jquerycode %}
+<script>
+    var sms_size = 160; 
+    function countChar(id){
+        var title = $("label[for=id_body_" + id + "]").html();
+        var text = $("#id_body_" + id).val();
+        if (text.length > sms_size){
+            text = text.substring(0,sms_size);
+            $("#id_body_" + id).val(text);
+        }
+        $("label[for=id_body_" + id + "]").html("Cuerpo ("+$("#id_body_" + id).val().length+"/"+sms_size+")");
+    }
+</script> 
+{% endblock %}
+
+{% block maincontent %} 
+    <script type="text/javascript" src="{{ MEDIA_URL }}/jquery/jquery-1.3.2.min.js"></script>
+    <script type="text/javascript" src="{{ MEDIA_URL }}/jquery/cambia.js"></script>
+
+    <h1 class="block">{% trans 'Contact list' %}</h1>
+    <div class="column1-unit">
+        {% if object_list %}
+            <h1>{% trans "Available contacts" %}</h1>
+            {% if msg %}
+                <p><h2 align="center">{{ msg }}</h2></p>
+            {% endif %}
+            <table width=100%> 
+                <tr>
+                    <th>{% trans "Name" %}</th>
+                    <th>{% trans "Mobile" %}</th>
+                    <th>{% trans "Email" %}</th>
+                    <th width=99px>{% trans "Actions" %}</th>
+                </tr>
+                {% for obj in object_list %}
+                    <tr>
+                        <td><a href="{% url contacto_editar obj.id %}">{{ obj }}</a></td>
+                        <td>{% if obj.moviles %}
+                            <select id="list_{{ obj.id }}" onChange="cambia_movil({{ obj.id }});" >
+                                {% for m in obj.moviles %}
+                                    {% if forloop.first %}
+                                        <option selected="selected" value="{{ m.dato }}">{{ m.show }} {{ m.dato }}</option>
+                                    {% else %}
+                                        <option value="{{ m.dato }}">{{ m.show }} {{ m.dato }}</option>
+                                    {% endif %}
+                                {% endfor %}
+                            </select>
+                            {% endif %}
+                        </td>
+                        <td>{% if obj.email %}
+                            <select id="email_{{ obj.id }}" style="width:140px">
+                                {% for m in obj.emails %}
+                                    {% if forloop.first %}
+                                        <option selected="selected" value="{{ m.dato }}">{{ m.dato }}</option>
+                                    {% else %}
+                                        <option value="{{ m.dato }}">{{ m.dato }}</option>
+                                    {% endif %}
+                                {% endfor %}
+                            {% endif %}
+                        </td>
+                        {% spaceless %}
+                        <td><a href="{% url contacto_editar obj.id %}"><img src="{{ MEDIA_URL }}/img/edit.png" alt="Edit" style="border:0"/></a> 
+                            <a href="{% url contacto_eliminar obj.id %}"><img src="{{ MEDIA_URL }}/img/editdelete.png" alt="Del" width=16px height=16px style="border:0"></a>
+                            {% if obj.tlf_movil %}
+                                <img src="{{ MEDIA_URL }}/img/newmsg.png" alt="Send msg" width=16px height=16px style="border:0" onClick="toggleStatus({{ obj.id }});" />
+                            {% endif %}
+                            {% if obj.email %}
+                                {# <a href="mailto:{{ obj.email }}" target="_blank"><img src="{{ MEDIA_URL }}/img/xfmail.png" alt="Send mail" style="border:0"/></a> #}
+                                <img src="{{ MEDIA_URL }}/img/xfmail.png" alt="Send mail" style="border:0" onClick="location.href='mailto:' + get_email({{ obj.id }});"/>
+                            {% endif %}
+                        </td>
+                        {% endspaceless %}
+                    </tr>
+                    {% for d in obj.direccion %}
+                    <tr>
+                        <td colspan=4><b>({{ d.get_tipo_display }})</b> {{ d }}</td>
+                    </tr>
+                    {% endfor %}
+                    <tr id="etiqueta_{{ obj.id }}" style="display:none">
+                        <td colspan=4>
+                            <form action="." method="POST">
+                                <fieldset>
+                                    <textarea name="text" id="id_body_{{ obj.id }}" rows="5" cols="50" onKeyUp="countChar({{obj.id}});"></textarea> 
+                                    <label class="required" for="id_body_{{ obj.id }}" id="id_label_{{ obj.id }}">Cuerpo</label>
+                                    <input type="submit" value="{% trans 'Send' %}" />
+                                    <input type="hidden" name="mobile" id="mobile_{{ obj.id }}" value="" />
+                                </fieldset>
+                            </form>
+                            <script type="text/javascript">cambia_movil({{ obj.id }});</script>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </table>
+        {% else %}
+            <br><h2>{% trans "There are any contact in your address book." %}</h2>
+        {% endif %}    
+    </div>
+{% endblock %} 
+

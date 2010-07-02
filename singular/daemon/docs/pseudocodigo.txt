@@ -1,0 +1,53 @@
+#######################################################################
+#  SingularMS version 1.0                                             #
+#######################################################################
+#  This file is a part of SingularMS.                                 #
+#                                                                     #
+#  SingularMs is free software; you can copy, modify, and distribute  #
+#  it under the terms of the GNU Affero General Public License        #
+#  Version 1.0, 21 May 2007.                                          #
+#                                                                     #
+#  SingularMS is distributed in the hope that it will be useful, but  #
+#  WITHOUT ANY WARRANTY; without even the implied warranty of         #
+#  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.               #
+#  See the GNU Affero General Public License for more details.        #
+#                                                                     #
+#  You should have received a copy of the GNU Affero General Public   #
+#  License with this program; if not, contact Galotecnia              #
+#  at contacto[AT]galotecnia[DOT]org. If you have questions about the #
+#  GNU Affero General Public License see "Frequently Asked Questions" #
+#  at http://www.gnu.org/licenses/gpl-faq.html                        #
+#######################################################################
+
+
+mensaje::encolaNow()
+	mirar si hay saldo cliente
+	mirar si account del msg es permitida para el cliente
+	mirar saldo account
+	mirar saldo general account
+	ntiplicar el mensaje en las queue con el account que sea
+	pnoer el processed = 1
+	ws_despierta(account)
+
+ws_despierta(account)
+	hilo.ags[account].skip = False
+	Despierta variable condicion
+
+
+		
+thread_despachador
+	def __init__(self):
+		ags = []
+		for account in Accounts.object.all():
+			ag = AccountGroup(self.account)
+			ags.append(ag)
+
+	def run(self):
+		while true:
+			did_something = False
+			for ag in ags:
+				if not ag.skip:
+					ag.procesa()
+					did_something = True
+			if not did_something:
+				duerme variable condicion

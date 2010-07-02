@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+{% load i18n display_form %}
+
+{% comment %}
+
+#######################################################################
+#  SingularMS version 1.0                                             #
+#######################################################################
+#  This file is a part of SingularMS.                                 #
+#                                                                     #
+#  SingularMs is free software; you can copy, modify, and distribute  #
+#  it under the terms of the GNU Affero General Public License        #
+#  Version 1.0, 21 May 2007.                                          #
+#                                                                     #
+#  SingularMS is distributed in the hope that it will be useful, but  #
+#  WITHOUT ANY WARRANTY; without even the implied warranty of         #
+#  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.               #
+#  See the GNU Affero General Public License for more details.        #
+#                                                                     #
+#  You should have received a copy of the GNU Affero General Public   #
+#  License with this program; if not, contact Galotecnia              #
+#  at contacto[AT]galotecnia[DOT]org. If you have questions about the #
+#  GNU Affero General Public License see "Frequently Asked Questions" #
+#  at http://www.gnu.org/licenses/gpl-faq.html                        #
+#######################################################################
+
+{% endcomment %}
+
+{% block layout %}
+<link rel="stylesheet" type="text/css" media="screen,projection,print" href="{{ MEDIA_URL }}/css/layout2_setup.css" />
+<link rel="stylesheet" type="text/css" media="screen,projection,print" href="{{ MEDIA_URL }}/css/layout2_text.css" />
+{% endblock %}
+
+
+{% block maincontent %} 
+    <h1 class="block"><a href="{% url contacto_editar object.id %}">{% trans 'Contact ' %}{{ label }}</a></h1>
+    <div class="column1-unit">
+        <div class="contactform">
+            <form action="." method="POST">
+                {% if form.visible_fields %}
+                    <fieldset>
+                        <legend>{% trans "Data" %}</legend>
+                        {{ form.as_p }}
+                    </fieldset>
+                {% endif %}
+                <fieldset>
+                    <legend>{% trans "New data" %}</legend>
+                    {{ new_form.as_p }}
+                </fieldset>
+                <p align="center">
+                    <input type="submit" class="button" align="center" value="{% trans 'Save' %}" style="float:None" />
+                    <input type="push" class="button" align="center" style='float:None' value="{% trans 'Back' %}" \
+                        onClick="location.href='{% url contacto_editar object.id %}'" />       
+            </form>
+        </div> 
+    </div>
+{% endblock %} 
+
