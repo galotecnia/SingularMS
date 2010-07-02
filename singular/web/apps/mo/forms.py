@@ -61,6 +61,15 @@ class bodyTxtField(forms.CharField):
         itemTxt.save()
         return itemTxt
 
+# For debug processes only. Should be deleted 
+class incomingMsgForm(forms.ModelForm):     
+    class Meta: 
+        model = IncomingMessage 
+               
+    def __init__(self, user=None, *args, **kwargs): 
+        self.user = user 
+        super(forms.ModelForm, self).__init__(*args, **kwargs)
+
 class commandForm(forms.ModelForm):
     defaultAnswer = bodyTxtField(label=_("Default answer"), required=False)
     class Meta:
