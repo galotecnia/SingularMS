@@ -1,0 +1,75 @@
+{% comment %}
+
+#######################################################################
+#  SingularMS version 1.0                                             #
+#######################################################################
+#  This file is a part of SingularMS.                                 #
+#                                                                     #
+#  SingularMs is free software; you can copy, modify, and distribute  #
+#  it under the terms of the GNU Affero General Public License        #
+#  Version 1.0, 21 May 2007.                                          #
+#                                                                     #
+#  SingularMS is distributed in the hope that it will be useful, but  #
+#  WITHOUT ANY WARRANTY; without even the implied warranty of         #
+#  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.               #
+#  See the GNU Affero General Public License for more details.        #
+#                                                                     #
+#  You should have received a copy of the GNU Affero General Public   #
+#  License with this program; if not, contact Galotecnia              #
+#  at contacto[AT]galotecnia[DOT]org. If you have questions about the #
+#  GNU Affero General Public License see "Frequently Asked Questions" #
+#  at http://www.gnu.org/licenses/gpl-faq.html                        #
+#######################################################################
+
+{% endcomment %}
+
+
+{% load i18n %}
+{% load pagination_tags %}
+{% if data %}
+            {% autopaginate data pag_index%}
+            {%paginate %}
+            <div id="list">
+            
+            <table>
+                <tbody>
+                    <tr>
+                       <th class="top" scope="col" width="5%">{%trans "Id"%}</th>
+                        <th class="top" scope="col">{% trans "Name" %}</th>
+                        <th class="top" scope="col">{% trans "Description" %}</th>
+                        <th class="top" scope="col">{% trans "Creation date" %}</th> 
+                        <th class="top" scope="col">{% trans "Active" %}</th>
+                        <th class="top" scope="col" width="12%">{% trans "Actions" %}</th>
+                    </tr>
+                    {% for object in data %}
+                        <tr>
+                            <th scope="row">{{ object.id }}</th>
+                            <td>{{ object.name }}</td>
+							<td>{{ object.description|truncatewords:"10" }}</td>
+							<td>{{ object.creationDate|date:"d-m-Y" }}</td>
+                            <td>{% if object.active %}{% trans "Active" %}{% else %}No {% trans "Active" %}{% endif %}</td>
+							<td>
+                                <a href="{%url update_channel object.id%}"><img alt="{% trans "Edit channel" %}"
+src="{{MEDIA_URL}}/img/edit.png"/></a>
+								<a align="right" href="{% url delete_channel object.id %}"><img alt="{% trans "Delete channel" %}"
+src="{{MEDIA_URL}}/img/editdelete.png"/></a>
+							</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            </div>
+{% else %}
+        <h1 class="block">{% trans "Channels not found" %}</h1>
+		<div class="column1-unit">
+			<h1>{% trans "Channels not found" %}</h1>
+			<p>
+			{% blocktrans %}
+				Error: SingularMS didn't found the objects that you have
+				requested, please contact with your system administrator.
+			{% endblocktrans %}
+
+			</p>
+		</div>
+       
+{% endif %} 

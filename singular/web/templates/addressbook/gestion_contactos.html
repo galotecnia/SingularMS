@@ -1,0 +1,85 @@
+{% extends "base.html" %}
+{% load i18n display_form %}
+
+{% comment %}
+
+#######################################################################
+#  SingularMS version 1.0                                             #
+#######################################################################
+#  This file is a part of SingularMS.                                 #
+#                                                                     #
+#  SingularMs is free software; you can copy, modify, and distribute  #
+#  it under the terms of the GNU Affero General Public License        #
+#  Version 1.0, 21 May 2007.                                          #
+#                                                                     #
+#  SingularMS is distributed in the hope that it will be useful, but  #
+#  WITHOUT ANY WARRANTY; without even the implied warranty of         #
+#  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.               #
+#  See the GNU Affero General Public License for more details.        #
+#                                                                     #
+#  You should have received a copy of the GNU Affero General Public   #
+#  License with this program; if not, contact Galotecnia              #
+#  at contacto[AT]galotecnia[DOT]org. If you have questions about the #
+#  GNU Affero General Public License see "Frequently Asked Questions" #
+#  at http://www.gnu.org/licenses/gpl-faq.html                        #
+#######################################################################
+
+{% endcomment %}
+
+{% block layout %}
+<link rel="stylesheet" type="text/css" media="screen,projection,print" href="{{ MEDIA_URL }}/css/layout2_setup.css" />
+<link rel="stylesheet" type="text/css" media="screen,projection,print" href="{{ MEDIA_URL }}/css/layout2_text.css" />
+{% endblock %}
+
+
+{% block maincontent %} 
+    <h1 class="block">{{ label }} {% trans 'contact' %} {{ object }}</h1>
+    <div class="column1-unit">
+        <div class="contactform2">
+            <form action="." method="POST">
+                <fieldset>
+                    <legend>{% trans "Contact" %}</legend>
+                    {% display_form form %}
+                </fieldset>
+                {% if dato_form %}
+                    <fieldset>
+                        <legend>{% trans "Contact data" %}<legend>
+                        {% display_form dato_form %}
+                    </fieldset>
+                {% else %}
+                    {% if object.get_datos %}
+                        <table style="width:95%">
+                            {% for dato in object.get_datos %}
+                                <tr><td><b>{{ dato.get_clase_display }}</b></td><td>{{ dato.dato|safe }}</td></tr>
+                            {% endfor %}
+                        </table>
+                    {% endif %}
+                    <br><p align="center"><a href="{% url contacto_datos object.id %}">{% trans "Manage contact data" %}</a></p>
+                {% endif %}
+                {% if dir_form %}
+                    <fieldset>
+                        <legend>{% trans "Address" %}<legend>
+                        {% display_form dir_form %}
+                    </fieldset>
+                {% else %}
+                    {% if object.direccion %}
+                        <table style="width:95%">
+                            {% for dir in object.direccion %}
+                                <tr><td><b>{{ dir.get_tipo_display }}</b></td><td>{{ dir }}</td></tr>
+                            {% endfor %}
+                        </table>
+                    {% endif %}
+                    <br><p align="center"><a href="{% url contacto_direcciones object.id %}">{% trans "Manage contact address" %}</a></p>
+                {% endif %}
+                <p align="center">
+                    <input type="submit" class="button" align="center" value="{{ label }}" style='float:None'/> 
+                    {% if not dir_form %}
+                    <input type="push" class="button" align="center" style='float:None' value="{% trans 'Delete contact' %}" \
+                        onClick="location.href='{% url contacto_eliminar object.id %}'" />
+                    {% endif %}
+                </p>
+            </form>
+        </div> 
+    </div>
+{% endblock %} 
+

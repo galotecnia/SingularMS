@@ -1,0 +1,117 @@
+{% extends "base.html" %}
+
+{% comment %}
+
+#######################################################################
+#  SingularMS version 1.0                                             #
+#######################################################################
+#  This file is a part of SingularMS.                                 #
+#                                                                     #
+#  SingularMs is free software; you can copy, modify, and distribute  #
+#  it under the terms of the GNU Affero General Public License        #
+#  Version 1.0, 21 May 2007.                                          #
+#                                                                     #
+#  SingularMS is distributed in the hope that it will be useful, but  #
+#  WITHOUT ANY WARRANTY; without even the implied warranty of         #
+#  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.               #
+#  See the GNU Affero General Public License for more details.        #
+#                                                                     #
+#  You should have received a copy of the GNU Affero General Public   #
+#  License with this program; if not, contact Galotecnia              #
+#  at contacto[AT]galotecnia[DOT]org. If you have questions about the #
+#  GNU Affero General Public License see "Frequently Asked Questions" #
+#  at http://www.gnu.org/licenses/gpl-faq.html                        #
+#######################################################################
+
+{% endcomment %}
+
+{% load i18n pagination_tags %}
+
+{% block layout %}
+    <link rel="stylesheet" type="text/css" media="screen,projection,print" href="{{ MEDIA_URL }}/css/layout2_setup.css" />
+    <link rel="stylesheet" type="text/css" media="screen,projection,print" href="{{ MEDIA_URL }}/css/layout2_text.css" />
+{% endblock %}
+
+
+{% block maincontent %} 
+    <h1 class="block">{{ channel }} {% trans 'message status' %}</h1>
+    <div class="column1-unit">
+        {% if object_list %}
+            {% autopaginate object_list %}
+            {% paginate %}
+            <table>
+                <thead>
+                    <tr> 
+                        <th class="top" scope="col" >{% trans "Phone" %}</th>
+                        <th class="top" scope="col" >{% trans "Sent date" %}</th>
+                        <th class="top" scope="col" >{% trans "Status" %}</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for object in object_list %}
+                        <tr>
+                            <td>{{ object.mobile }}</td>
+                            <td>{{ object.sentDate|date:"d-m-Y H:i:s"}}</td>
+                            <td>
+                                {% ifequal object.local_status 1 %}
+                                    <img alt="{% trans "Sent" %}" src="{{MEDIA_URL}}/img/true.png"/>
+                                    {% ifequal object.server_status 1 %}
+                                        <img alt="{% trans "Sent" %}" src="{{MEDIA_URL}}/img/true.png"/>
+                                    {%else %}
+                                        {% ifequal object.server_status 2 %}
+                                            <img alt="{% trans "Error" %}" src="{{MEDIA_URL}}/img/false.png" title="{{ object.status_info }}"/> 
+                                        {% else %}
+                                                <img alt="{% trans "Sending" %}" src="{{MEDIA_URL}}/img/sending.jpg"/>    
+                                        {% endifequal %}
+                                    {% endifequal %}
+                                {%else %}
+                                    {% ifequal object.local_status 2 %}
+                                        <img alt="{% trans "Error" %}" src="{{MEDIA_URL}}/img/false.png" title="{{ object.status_info }}"/> 
+                                    {% else %}
+                                        {% ifequal object.local_status 3 %}
+                                            <img alt="{% trans "Sending" %}" src="{{MEDIA_URL}}/img/sending.jpg"/>    
+                                        {% else %}
+                                            <img alt="{% trans "Unknown" %}" src="{{MEDIA_URL}}/img/status.png"/>   
+                                        {% endifequal %}
+                                    {% endifequal %}
+                                {% endifequal %}
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            <div class="column1-unit">
+                <h2 align="center">{% trans "Leyend" %}</h2>
+                <table>
+                <tr>
+                    <th>{% trans "Sending" %}</th><th><img alt="{% trans "Sending" %}" src="{{MEDIA_URL}}/img/sending.jpg" align="right"/></th>
+                    <th>{% trans "Error" %}</th><th><img alt="{% trans "Error" %}" src="{{MEDIA_URL}}/img/false.png" align="right"/></th>
+                </tr>
+                <tr>
+                    <th>{% trans "OK" %}</th><th><img alt="{% trans "OK" %}" src="{{MEDIA_URL}}/img/true.png" align="right"/></th>
+                    <th>{% trans "Unknown" %}</th><th><img alt="{% trans "Unknown" %}" src="{{MEDIA_URL}}/img/status.png" align="right"/></th>
+                </tr>
+                <tr>
+                    <th>{% trans "Not Processed" %}</th><th><img alt="{% trans "Not processed" %}" src="{{MEDIA_URL}}/img/notproc.png" align="right"/></th>
+                    <th>{% trans "Remove" %}</th><th><img alt="{% trans "Remove" %}" src="{{MEDIA_URL}}/img/editdelete.png" align="right"/></th>
+                </tr>
+                <tr>
+                    <th colspan=2>{% trans "First column status = Local Server" %}</th>
+                    <th colspan=2>{% trans "Second column status = Access Server" %}</th>
+                </tr>
+                </table>
+            </div>
+        {% else %}
+            <h1 class="block">{% trans "Messages not found" %}</h1> 
+            <div class="column1-unit">
+                <h1>{% trans "Messages not found" %}</h1>
+                <p>
+                    {% blocktrans %}
+                        Error: SingularMS didn't found the objects that you have
+                        requested, please contact with your system administrator.
+                    {% endblocktrans %}
+                </p>
+            </div>
+        {% endif %} 
+    </div>
+{% endblock %}

@@ -1,0 +1,1263 @@
+[
+  {
+    "pk": 28, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "add_access", 
+      "name": "Can add Access", 
+      "content_type": 10
+    }
+  }, 
+  {
+    "pk": 34, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "add_account", 
+      "name": "Can add Account", 
+      "content_type": 12
+    }
+  }, 
+  {
+    "pk": 31, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "add_customer", 
+      "name": "Can add Customer", 
+      "content_type": 11
+    }
+  }, 
+  {
+    "pk": 40, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "add_log", 
+      "name": "Can add Log", 
+      "content_type": 14
+    }
+  }, 
+  {
+    "pk": 25, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "add_provider", 
+      "name": "Can add provider", 
+      "content_type": 9
+    }
+  }, 
+  {
+    "pk": 37, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "add_purchase", 
+      "name": "Can add Purchase", 
+      "content_type": 13
+    }
+  }, 
+  {
+    "pk": 29, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "change_access", 
+      "name": "Can change Access", 
+      "content_type": 10
+    }
+  }, 
+  {
+    "pk": 35, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "change_account", 
+      "name": "Can change Account", 
+      "content_type": 12
+    }
+  }, 
+  {
+    "pk": 32, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "change_customer", 
+      "name": "Can change Customer", 
+      "content_type": 11
+    }
+  }, 
+  {
+    "pk": 41, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "change_log", 
+      "name": "Can change Log", 
+      "content_type": 14
+    }
+  }, 
+  {
+    "pk": 26, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "change_provider", 
+      "name": "Can change provider", 
+      "content_type": 9
+    }
+  }, 
+  {
+    "pk": 38, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "change_purchase", 
+      "name": "Can change Purchase", 
+      "content_type": 13
+    }
+  }, 
+  {
+    "pk": 30, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "delete_access", 
+      "name": "Can delete Access", 
+      "content_type": 10
+    }
+  }, 
+  {
+    "pk": 36, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "delete_account", 
+      "name": "Can delete Account", 
+      "content_type": 12
+    }
+  }, 
+  {
+    "pk": 33, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "delete_customer", 
+      "name": "Can delete Customer", 
+      "content_type": 11
+    }
+  }, 
+  {
+    "pk": 42, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "delete_log", 
+      "name": "Can delete Log", 
+      "content_type": 14
+    }
+  }, 
+  {
+    "pk": 27, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "delete_provider", 
+      "name": "Can delete provider", 
+      "content_type": 9
+    }
+  }, 
+  {
+    "pk": 39, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "delete_purchase", 
+      "name": "Can delete Purchase", 
+      "content_type": 13
+    }
+  }, 
+  {
+    "pk": 22, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "add_logentry", 
+      "name": "Can add log entry", 
+      "content_type": 8
+    }
+  }, 
+  {
+    "pk": 23, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "change_logentry", 
+      "name": "Can change log entry", 
+      "content_type": 8
+    }
+  }, 
+  {
+    "pk": 24, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "delete_logentry", 
+      "name": "Can delete log entry", 
+      "content_type": 8
+    }
+  }, 
+  {
+    "pk": 4, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "add_group", 
+      "name": "Can add group", 
+      "content_type": 2
+    }
+  }, 
+  {
+    "pk": 10, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "add_message", 
+      "name": "Can add message", 
+      "content_type": 4
+    }
+  }, 
+  {
+    "pk": 1, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "add_permission", 
+      "name": "Can add permission", 
+      "content_type": 1
+    }
+  }, 
+  {
+    "pk": 7, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "add_user", 
+      "name": "Can add user", 
+      "content_type": 3
+    }
+  }, 
+  {
+    "pk": 5, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "change_group", 
+      "name": "Can change group", 
+      "content_type": 2
+    }
+  }, 
+  {
+    "pk": 11, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "change_message", 
+      "name": "Can change message", 
+      "content_type": 4
+    }
+  }, 
+  {
+    "pk": 2, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "change_permission", 
+      "name": "Can change permission", 
+      "content_type": 1
+    }
+  }, 
+  {
+    "pk": 8, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "change_user", 
+      "name": "Can change user", 
+      "content_type": 3
+    }
+  }, 
+  {
+    "pk": 6, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "delete_group", 
+      "name": "Can delete group", 
+      "content_type": 2
+    }
+  }, 
+  {
+    "pk": 12, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "delete_message", 
+      "name": "Can delete message", 
+      "content_type": 4
+    }
+  }, 
+  {
+    "pk": 3, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "delete_permission", 
+      "name": "Can delete permission", 
+      "content_type": 1
+    }
+  }, 
+  {
+    "pk": 9, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "delete_user", 
+      "name": "Can delete user", 
+      "content_type": 3
+    }
+  }, 
+  {
+    "pk": 13, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "add_contenttype", 
+      "name": "Can add content type", 
+      "content_type": 5
+    }
+  }, 
+  {
+    "pk": 14, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "change_contenttype", 
+      "name": "Can change content type", 
+      "content_type": 5
+    }
+  }, 
+  {
+    "pk": 15, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "delete_contenttype", 
+      "name": "Can delete content type", 
+      "content_type": 5
+    }
+  }, 
+  {
+    "pk": 70, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "add_admincommand", 
+      "name": "Can add admin command", 
+      "content_type": 24
+    }
+  }, 
+  {
+    "pk": 67, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "add_command", 
+      "name": "Can add command", 
+      "content_type": 23
+    }
+  }, 
+  {
+    "pk": 79, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "add_commandstats", 
+      "name": "Can add command stat", 
+      "content_type": 27
+    }
+  }, 
+  {
+    "pk": 76, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "add_externalcommand", 
+      "name": "Can add external command", 
+      "content_type": 26
+    }
+  }, 
+  {
+    "pk": 73, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "add_replycommand", 
+      "name": "Can add reply command", 
+      "content_type": 25
+    }
+  }, 
+  {
+    "pk": 71, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "change_admincommand", 
+      "name": "Can change admin command", 
+      "content_type": 24
+    }
+  }, 
+  {
+    "pk": 68, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "change_command", 
+      "name": "Can change command", 
+      "content_type": 23
+    }
+  }, 
+  {
+    "pk": 80, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "change_commandstats", 
+      "name": "Can change command stat", 
+      "content_type": 27
+    }
+  }, 
+  {
+    "pk": 77, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "change_externalcommand", 
+      "name": "Can change external command", 
+      "content_type": 26
+    }
+  }, 
+  {
+    "pk": 74, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "change_replycommand", 
+      "name": "Can change reply command", 
+      "content_type": 25
+    }
+  }, 
+  {
+    "pk": 72, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "delete_admincommand", 
+      "name": "Can delete admin command", 
+      "content_type": 24
+    }
+  }, 
+  {
+    "pk": 69, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "delete_command", 
+      "name": "Can delete command", 
+      "content_type": 23
+    }
+  }, 
+  {
+    "pk": 81, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "delete_commandstats", 
+      "name": "Can delete command stat", 
+      "content_type": 27
+    }
+  }, 
+  {
+    "pk": 78, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "delete_externalcommand", 
+      "name": "Can delete external command", 
+      "content_type": 26
+    }
+  }, 
+  {
+    "pk": 75, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "delete_replycommand", 
+      "name": "Can delete reply command", 
+      "content_type": 25
+    }
+  }, 
+  {
+    "pk": 46, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "add_attachment", 
+      "name": "Can add attachment", 
+      "content_type": 16
+    }
+  }, 
+  {
+    "pk": 43, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "add_body", 
+      "name": "Can add Body", 
+      "content_type": 15
+    }
+  }, 
+  {
+    "pk": 49, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "add_channel", 
+      "name": "Can add channel", 
+      "content_type": 17
+    }
+  }, 
+  {
+    "pk": 64, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "add_channelmessage", 
+      "name": "Can add channel message", 
+      "content_type": 22
+    }
+  }, 
+  {
+    "pk": 55, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "add_message", 
+      "name": "Can add message", 
+      "content_type": 19
+    }
+  }, 
+  {
+    "pk": 58, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "add_smshistory", 
+      "name": "Can add SMS History", 
+      "content_type": 20
+    }
+  }, 
+  {
+    "pk": 61, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "add_smsqueue", 
+      "name": "Can add SMS enqueued", 
+      "content_type": 21
+    }
+  }, 
+  {
+    "pk": 52, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "add_subscriber", 
+      "name": "Can add subscriber", 
+      "content_type": 18
+    }
+  }, 
+  {
+    "pk": 47, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "change_attachment", 
+      "name": "Can change attachment", 
+      "content_type": 16
+    }
+  }, 
+  {
+    "pk": 44, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "change_body", 
+      "name": "Can change Body", 
+      "content_type": 15
+    }
+  }, 
+  {
+    "pk": 50, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "change_channel", 
+      "name": "Can change channel", 
+      "content_type": 17
+    }
+  }, 
+  {
+    "pk": 65, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "change_channelmessage", 
+      "name": "Can change channel message", 
+      "content_type": 22
+    }
+  }, 
+  {
+    "pk": 56, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "change_message", 
+      "name": "Can change message", 
+      "content_type": 19
+    }
+  }, 
+  {
+    "pk": 59, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "change_smshistory", 
+      "name": "Can change SMS History", 
+      "content_type": 20
+    }
+  }, 
+  {
+    "pk": 62, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "change_smsqueue", 
+      "name": "Can change SMS enqueued", 
+      "content_type": 21
+    }
+  }, 
+  {
+    "pk": 53, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "change_subscriber", 
+      "name": "Can change subscriber", 
+      "content_type": 18
+    }
+  }, 
+  {
+    "pk": 48, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "delete_attachment", 
+      "name": "Can delete attachment", 
+      "content_type": 16
+    }
+  }, 
+  {
+    "pk": 45, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "delete_body", 
+      "name": "Can delete Body", 
+      "content_type": 15
+    }
+  }, 
+  {
+    "pk": 51, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "delete_channel", 
+      "name": "Can delete channel", 
+      "content_type": 17
+    }
+  }, 
+  {
+    "pk": 66, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "delete_channelmessage", 
+      "name": "Can delete channel message", 
+      "content_type": 22
+    }
+  }, 
+  {
+    "pk": 57, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "delete_message", 
+      "name": "Can delete message", 
+      "content_type": 19
+    }
+  }, 
+  {
+    "pk": 60, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "delete_smshistory", 
+      "name": "Can delete SMS History", 
+      "content_type": 20
+    }
+  }, 
+  {
+    "pk": 63, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "delete_smsqueue", 
+      "name": "Can delete SMS enqueued", 
+      "content_type": 21
+    }
+  }, 
+  {
+    "pk": 54, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "delete_subscriber", 
+      "name": "Can delete subscriber", 
+      "content_type": 18
+    }
+  }, 
+  {
+    "pk": 94, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "add_alarm", 
+      "name": "Can add alarm", 
+      "content_type": 32
+    }
+  }, 
+  {
+    "pk": 85, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "add_alarmlog", 
+      "name": "Can add alarm log", 
+      "content_type": 29
+    }
+  }, 
+  {
+    "pk": 82, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "add_contactperson", 
+      "name": "Can add contact person", 
+      "content_type": 28
+    }
+  }, 
+  {
+    "pk": 97, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "add_register", 
+      "name": "Can add register", 
+      "content_type": 33
+    }
+  }, 
+  {
+    "pk": 91, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "add_sensor", 
+      "name": "Can add sensor", 
+      "content_type": 31
+    }
+  }, 
+  {
+    "pk": 100, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "add_sensorgroup", 
+      "name": "Can add sensor group", 
+      "content_type": 34
+    }
+  }, 
+  {
+    "pk": 88, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "add_sensortype", 
+      "name": "Can add sensor type", 
+      "content_type": 30
+    }
+  }, 
+  {
+    "pk": 95, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "change_alarm", 
+      "name": "Can change alarm", 
+      "content_type": 32
+    }
+  }, 
+  {
+    "pk": 86, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "change_alarmlog", 
+      "name": "Can change alarm log", 
+      "content_type": 29
+    }
+  }, 
+  {
+    "pk": 83, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "change_contactperson", 
+      "name": "Can change contact person", 
+      "content_type": 28
+    }
+  }, 
+  {
+    "pk": 98, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "change_register", 
+      "name": "Can change register", 
+      "content_type": 33
+    }
+  }, 
+  {
+    "pk": 92, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "change_sensor", 
+      "name": "Can change sensor", 
+      "content_type": 31
+    }
+  }, 
+  {
+    "pk": 101, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "change_sensorgroup", 
+      "name": "Can change sensor group", 
+      "content_type": 34
+    }
+  }, 
+  {
+    "pk": 89, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "change_sensortype", 
+      "name": "Can change sensor type", 
+      "content_type": 30
+    }
+  }, 
+  {
+    "pk": 96, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "delete_alarm", 
+      "name": "Can delete alarm", 
+      "content_type": 32
+    }
+  }, 
+  {
+    "pk": 87, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "delete_alarmlog", 
+      "name": "Can delete alarm log", 
+      "content_type": 29
+    }
+  }, 
+  {
+    "pk": 84, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "delete_contactperson", 
+      "name": "Can delete contact person", 
+      "content_type": 28
+    }
+  }, 
+  {
+    "pk": 99, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "delete_register", 
+      "name": "Can delete register", 
+      "content_type": 33
+    }
+  }, 
+  {
+    "pk": 93, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "delete_sensor", 
+      "name": "Can delete sensor", 
+      "content_type": 31
+    }
+  }, 
+  {
+    "pk": 102, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "delete_sensorgroup", 
+      "name": "Can delete sensor group", 
+      "content_type": 34
+    }
+  }, 
+  {
+    "pk": 90, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "delete_sensortype", 
+      "name": "Can delete sensor type", 
+      "content_type": 30
+    }
+  }, 
+  {
+    "pk": 16, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "add_session", 
+      "name": "Can add session", 
+      "content_type": 6
+    }
+  }, 
+  {
+    "pk": 17, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "change_session", 
+      "name": "Can change session", 
+      "content_type": 6
+    }
+  }, 
+  {
+    "pk": 18, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "delete_session", 
+      "name": "Can delete session", 
+      "content_type": 6
+    }
+  }, 
+  {
+    "pk": 19, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "add_site", 
+      "name": "Can add site", 
+      "content_type": 7
+    }
+  }, 
+  {
+    "pk": 20, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "change_site", 
+      "name": "Can change site", 
+      "content_type": 7
+    }
+  }, 
+  {
+    "pk": 21, 
+    "model": "auth.permission", 
+    "fields": {
+      "codename": "delete_site", 
+      "name": "Can delete site", 
+      "content_type": 7
+    }
+  }, 
+  {
+    "pk": 1, 
+    "model": "auth.user", 
+    "fields": {
+      "username": "rene", 
+      "first_name": "", 
+      "last_name": "", 
+      "is_active": true, 
+      "is_superuser": true, 
+      "is_staff": true, 
+      "last_login": "2009-02-18 17:29:01", 
+      "groups": [], 
+      "user_permissions": [], 
+      "password": "sha1$1a273$a77fb359b75c9c1cffb2bd097e068f3e7fb59479", 
+      "email": "lfdksj2kf@lkd.com", 
+      "date_joined": "2009-02-17 19:30:39"
+    }
+  }, 
+  {
+    "pk": 2, 
+    "model": "auth.user", 
+    "fields": {
+      "username": "pepito", 
+      "first_name": "", 
+      "last_name": "", 
+      "is_active": true, 
+      "is_superuser": false, 
+      "is_staff": false, 
+      "last_login": "2009-02-17 19:31:11", 
+      "groups": [], 
+      "user_permissions": [], 
+      "password": "sha1$20b79$860284817da1563e036f46ea294e781bcc66391c", 
+      "email": "", 
+      "date_joined": "2009-02-17 19:31:11"
+    }
+  }, 
+  {
+    "pk": 3, 
+    "model": "auth.user", 
+    "fields": {
+      "username": "customer1", 
+      "first_name": "", 
+      "last_name": "", 
+      "is_active": true, 
+      "is_superuser": false, 
+      "is_staff": false, 
+      "last_login": "2009-02-17 19:32:26", 
+      "groups": [], 
+      "user_permissions": [], 
+      "password": "sha1$20b79$860284817da1563e036f46ea294e781bcc66391c", 
+      "email": "", 
+      "date_joined": "2009-02-17 19:32:26"
+    }
+  }, 
+  {
+    "pk": 1, 
+    "model": "sites.site", 
+    "fields": {
+      "domain": "example.com", 
+      "name": "example.com"
+    }
+  }, 
+  {
+    "pk": 1, 
+    "model": "accounting.provider", 
+    "fields": { 
+      "username": "PepitoTest", 
+      "first_name": "", 
+      "last_name": "", 
+      "is_active": true, 
+      "is_superuser": false, 
+      "is_staff": false, 
+      "last_login": "2009-02-17 19:31:11", 
+      "groups": [], 
+      "user_permissions": [], 
+      "password": "sha1$20b79$860284817da1563e036f46ea294e781bcc66391c", 
+      "email": "", 
+      "date_joined": "2009-02-17 19:31:11"
+    }
+  }, 
+  {
+    "pk": 1, 
+    "model": "accounting.access", 
+    "fields": {
+      "args1": "Dummy=Args", 
+      "description": "Dummy Access to test the application", 
+      "backend": 0, 
+      "name": "Dummy Access", 
+      "provider": 1
+    }
+  }, 
+  {
+    "pk": 2, 
+    "model": "accounting.customer", 
+    "fields": {
+      "providers": [
+        1
+      ], 
+      "groups": [], 
+      "user_permissions": []
+    }
+  }, 
+  {
+    "pk": 3, 
+    "model": "accounting.customer", 
+    "fields": {
+      "providers": [
+        1
+      ], 
+      "groups": [], 
+      "user_permissions": []
+    }
+  }, 
+  {
+    "pk": 1, 
+    "model": "accounting.account", 
+    "fields": {
+      "customer": 1, 
+      "access": 1, 
+      "args2": "other=args", 
+      "name": "AccessNoPurchase", 
+      "num_threads": 3
+    }
+  }, 
+  {
+    "pk": 2, 
+    "model": "accounting.account", 
+    "fields": {
+      "customer": 1, 
+      "access": 1, 
+      "args2": "other=args", 
+      "name": "AccessWithPurchase", 
+      "num_threads": 4
+    }
+  }, 
+  {
+    "pk": 3, 
+    "model": "accounting.account", 
+    "fields": {
+      "customer": 1, 
+      "access": 1, 
+      "args2": "args=args", 
+      "name": "AccessServeralPurchases", 
+      "num_threads": 5
+    }
+  }, 
+  {
+    "pk": 1, 
+    "model": "accounting.purchase", 
+    "fields": {
+      "available": 5000, 
+      "startDate": "2008-02-17", 
+      "account": 2, 
+      "endDate": "3009-02-17", 
+      "price": "1", 
+      "initial": 100000, 
+      "reserved": 0
+    }
+  }, 
+  {
+    "pk": 2, 
+    "model": "accounting.purchase", 
+    "fields": {
+      "available": 9, 
+      "startDate": "2008-02-18", 
+      "account": 3, 
+      "endDate": "3009-02-18", 
+      "price": "10", 
+      "initial": 10, 
+      "reserved": 2
+    }
+  }, 
+  {
+    "pk": 3, 
+    "model": "accounting.purchase", 
+    "fields": {
+      "available": 0, 
+      "startDate": "2007-02-18", 
+      "account": 3, 
+      "endDate": "3009-02-18", 
+      "price": "43", 
+      "initial": 100, 
+      "reserved": 0
+    }
+  }, 
+  {
+    "pk": 4, 
+    "model": "accounting.purchase", 
+    "fields": {
+      "available": 100, 
+      "startDate": "3009-02-18", 
+      "account": 3, 
+      "endDate": "3019-02-18", 
+      "price": "65", 
+      "initial": 1000, 
+      "reserved": 32
+    }
+  }, 
+  {
+    "pk": 5, 
+    "model": "accounting.purchase", 
+    "fields": {
+      "available": 23, 
+      "startDate": "2007-02-18", 
+      "account": 3, 
+      "endDate": "2008-02-18", 
+      "price": "65", 
+      "initial": 123, 
+      "reserved": 2
+    }
+  }, 
+  {
+    "pk": 6, 
+    "model": "accounting.purchase", 
+    "fields": {
+      "available": 1900, 
+      "startDate": "2007-02-18", 
+      "account": 3, 
+      "endDate": "3009-02-18", 
+      "price": "0", 
+      "initial": 2000, 
+      "reserved": 0
+    }
+  }, 
+  {
+    "pk": 1, 
+    "model": "mt.body", 
+    "fields": {
+      "plainTxt": "Test message", 
+      "mms": false, 
+      "encodedMsg": "Test message"
+    }
+  }, 
+  {
+    "pk": 1, 
+    "model": "mt.channel", 
+    "fields": {
+      "customer": [
+        1
+      ], 
+      "name": "TestChannel", 
+      "destructionDate": null, 
+      "active": true, 
+      "creationDate": "2009-02-18 19:30:18", 
+      "description": "A channel to test the application"
+    }
+  }, 
+  {
+    "pk": 1, 
+    "model": "mt.subscriber", 
+    "fields": {
+      "mobile": "666554433", 
+      "name": "Primer subscriptor", 
+      "creationDate": "2009-02-18 19:30:21", 
+      "channels": [
+        1
+      ]
+    }
+  }, 
+  {
+    "pk": 2, 
+    "model": "mt.subscriber", 
+    "fields": {
+      "mobile": "666665544", 
+      "name": "Segundo subscriptor", 
+      "creationDate": "2009-02-18 19:30:21", 
+      "channels": [
+        1
+      ]
+    }
+  }, 
+  {
+    "pk": 3, 
+    "model": "mt.subscriber", 
+    "fields": {
+      "mobile": "666776655", 
+      "name": "Tercer subscriptor", 
+      "creationDate": "2009-02-18 19:30:21", 
+      "channels": [
+        1
+      ]
+    }
+  }, 
+  {
+    "pk": 2, 
+    "model": "mt.message", 
+    "fields": {
+      "body": 1, 
+      "account": 3, 
+      "deactivationDate": "2009-02-18 19:37:08", 
+      "mobile": 654543432, 
+      "activationDate": "2009-02-18 19:37:07", 
+      "processed": false, 
+      "lastSentDate": "2009-02-18 19:37:10", 
+      "creationDate": "2009-02-18 19:37:25", 
+      "firstSentDate": "2009-02-18 19:37:10"
+    }
+  }, 
+  {
+    "pk": 1, 
+    "model": "mt.message", 
+    "fields": {
+      "body": 1, 
+      "account": 2, 
+      "deactivationDate": "2009-02-18 19:29:16", 
+      "mobile": 654432234, 
+      "activationDate": "2009-02-18 19:29:13", 
+      "processed": false, 
+      "lastSentDate": "2009-02-18 19:29:19", 
+      "creationDate": "2009-02-18 19:30:27", 
+      "firstSentDate": "2009-02-18 19:29:17"
+    }
+  }, 
+  {
+    "pk": 1, 
+    "model": "mt.smshistory", 
+    "fields": {
+      "priority": 6, 
+      "remote_id": "dummy1", 
+      "mobile": 657324987, 
+      "local_id": "testMessage1_", 
+      "sentDate": null, 
+      "error": false, 
+      "message": 1, 
+      "errorInfo": "", 
+      "expired": false
+    }
+  }, 
+  {
+    "pk": 2, 
+    "model": "mt.smshistory", 
+    "fields": {
+      "priority": 5, 
+      "remote_id": "dummy2", 
+      "mobile": 657324987, 
+      "local_id": "testMessage2_", 
+      "sentDate": "2009-02-18 19:37:35", 
+      "error": true, 
+      "message": 2, 
+      "errorInfo": "A critical error", 
+      "expired": false
+    }
+  }
+]

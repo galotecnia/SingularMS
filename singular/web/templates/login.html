@@ -1,0 +1,63 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% comment %}
+
+#######################################################################
+#  SingularMS version 1.0                                             #
+#######################################################################
+#  This file is a part of SingularMS.                                 #
+#                                                                     #
+#  SingularMs is free software; you can copy, modify, and distribute  #
+#  it under the terms of the GNU Affero General Public License        #
+#  Version 1.0, 21 May 2007.                                          #
+#                                                                     #
+#  SingularMS is distributed in the hope that it will be useful, but  #
+#  WITHOUT ANY WARRANTY; without even the implied warranty of         #
+#  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.               #
+#  See the GNU Affero General Public License for more details.        #
+#                                                                     #
+#  You should have received a copy of the GNU Affero General Public   #
+#  License with this program; if not, contact Galotecnia              #
+#  at contacto[AT]galotecnia[DOT]org. If you have questions about the #
+#  GNU Affero General Public License see "Frequently Asked Questions" #
+#  at http://www.gnu.org/licenses/gpl-faq.html                        #
+#######################################################################
+
+{% endcomment %}
+
+{% block layout %}
+<link rel="stylesheet" type="text/css" media="screen,projection,print" href="{{ MEDIA_URL }}/css/layout1_setup.css" />
+<link rel="stylesheet" type="text/css" media="screen,projection,print" href="{{ MEDIA_URL }}/css/layout1_text.css" />
+{% endblock %}
+
+{% block logoutmenu %}
+{% endblock %}
+
+{% block breadcrumbs %}
+<!-- Breadcrumbs -->
+{% endblock %}
+
+{% block leftmenu%}
+
+{% endblock %}
+
+{% block maincontent %}
+<div class="column1-unit">
+	<h1>{% trans 'Login form' %}</h1>
+		<div class="loginform">
+		<form method="post" action=""> 
+			<fieldset>
+				{{ form.as_p }}
+				<p>
+					<input type="submit" name="login" class="button" value="{% trans 'LOGIN' %}" />
+				</p>
+			</fieldset>
+		</form>
+	</div>
+</div>
+{% endblock %}
+
+{% block rightmenu%}
+{% endblock %}
+

@@ -1,0 +1,77 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% comment %}
+
+#######################################################################
+#  SingularMS version 1.0                                             #
+#######################################################################
+#  This file is a part of SingularMS.                                 #
+#                                                                     #
+#  SingularMs is free software; you can copy, modify, and distribute  #
+#  it under the terms of the GNU Affero General Public License        #
+#  Version 1.0, 21 May 2007.                                          #
+#                                                                     #
+#  SingularMS is distributed in the hope that it will be useful, but  #
+#  WITHOUT ANY WARRANTY; without even the implied warranty of         #
+#  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.               #
+#  See the GNU Affero General Public License for more details.        #
+#                                                                     #
+#  You should have received a copy of the GNU Affero General Public   #
+#  License with this program; if not, contact Galotecnia              #
+#  at contacto[AT]galotecnia[DOT]org. If you have questions about the #
+#  GNU Affero General Public License see "Frequently Asked Questions" #
+#  at http://www.gnu.org/licenses/gpl-faq.html                        #
+#######################################################################
+
+{% endcomment %}
+
+{% block layout %}
+<link rel="stylesheet" type="text/css" media="screen,projection,print" href="{{ MEDIA_URL }}/css/layout1_setup.css" />
+<link rel="stylesheet" type="text/css" media="screen,projection,print" href="{{ MEDIA_URL }}/css/layout1_text.css" />
+{% endblock %}
+
+
+{% block breadcrumbs %}
+{% endblock %}
+
+{% block leftmenu%}
+{% endblock %}
+
+{% block maincontent %}
+<div class="column1-unit">
+    <h1> Enviar SMS/MMS </h1>
+    <p>Podrán realizar esta actividad, cualquier usuario que tenga acceso al portal, con las restricciones ya explicadas en
+    <a href="{%url help templates_help.rol_and_right %}"> roles y derechos </a>. Será necesario entrar al sistema para poder usar este servicio, así como
+    cualquier otro ofertado en la aplicación. Una vez elegida la opción: Enviar-> enviar un mensaje. Observaremos la siguiente
+    pantalla:</p>
+
+    <img class="fullwidth" src="{{MEDIA_URL}}/img/easy_send.png"/>
+
+    <p>Una vez dentro de esta pantalla, se podrá mandar un mensaje, del tipo elegido entre la lista de los posibles, al móvil que indiquemos
+    y con el texto insertado.
+
+    Si por el contrario tenemos privilegios de administrador y deseamos mandar un mensaje avanzado, elegiremos en el menú de la izquierda,
+    la opción avanzado, donde veremos la siguiente pantalla.</p>
+
+<img class="fullwidth" src="{{MEDIA_URL}}/img/send_sms.png" />
+    
+    <p>Donde podremos elegir la cuenta a la que deseamos restar el coste del mensaje que vamos a envía. Las cuentas que aparecen
+    son las que este usuario puede utilizar (el administrador, tendrá acceso a todas). Se debe insertar tanto el móvil, como el texto
+    del sms y la fecha de envío, y si se desea la fecha a partir de la que se descartará el mensaje.</p>
+
+   <p> Si se ha optado por un MMS es indispensable insertar el adjunto apropiado.</p>
+
+   <h1> Enviar a canales </h1>
+   <p>Si se trata de enviar sms o mms a canales, una vez el usuario a entrado a la plataforma, si entra a enviar->enviar mensaje, y
+   en esa pantalla escoge en el menú de la izquierda Canal, podrá ver una pantalla como la siguiente:</p>
+<img class="fullwidth" src="{{MEDIA_URL}}/img/send_to_channel.png" />
+   <p> Los canales que se muestren serán a los que el usuario pueda mandar mensajes según la política de permisos estipulada en: 
+   <a href="{%url help templates_help.rol_and_right %}"> roles y derechos </a></p>
+   <p> Se deberá tener en cuenta los mismos campos obligatorios que se exigen para un envío de sms/mms individual.</p>
+</div>
+{% endblock %}
+
+{% block rightmenu%}
+{% endblock %}
+

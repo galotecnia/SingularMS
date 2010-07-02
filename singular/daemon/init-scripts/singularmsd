@@ -1,0 +1,116 @@
+#!/bin/sh -e
+#
+#######################################################################
+#  SingularMS version 1.0                                             #
+#######################################################################
+#  This file is a part of SingularMS.                                 #
+#                                                                     #
+#  SingularMs is free software; you can copy, modify, and distribute  #
+#  it under the terms of the GNU Affero General Public License        #
+#  Version 1.0, 21 May 2007.                                          #
+#                                                                     #
+#  SingularMS is distributed in the hope that it will be useful, but  #
+#  WITHOUT ANY WARRANTY; without even the implied warranty of         #
+#  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.               #
+#  See the GNU Affero General Public License for more details.        #
+#                                                                     #
+#  You should have received a copy of the GNU Affero General Public   #
+#  License with this program; if not, contact Galotecnia              #
+#  at contacto[AT]galotecnia[DOT]org. If you have questions about the #
+#  GNU Affero General Public License see "Frequently Asked Questions" #
+#  at http://www.gnu.org/licenses/gpl-faq.html                        #
+#######################################################################
+
+# Start or stop SingularMS daemon
+#
+# René Martín <rene.martin@galotecnia.com>
+# based on postfix's init.d script
+
+### BEGIN INIT INFO
+# Required-Start:    $local_fs $syslog $named $network $time
+# Required-Stop:     $local_fs $syslog $named $network
+# Should-Start:      postgresql mysql 
+# Should-Stop:       postgresql mysql 
+# Default-Start:     2 3 4 5
+# Default-Stop:      0 1 6
+# Short-Description: start and stop SingularMS daemon
+# Description:       SingularMS is a mobile phone comunication bridge
+### END INIT INFO
+
+BASEPATH=/opt/galotecnia/SingularMS/daemon
+PATH=/bin:/usr/bin:/sbin:/usr/sbin
+NAME=singularmsd
+DAEMON=$BASEPATH/singularmsd
+PIDFILE=/var/run/${NAME}.pid
+OPTIONS="-p $PIDFILE -v"
+
+TZ=
+unset TZ
+
+. /lib/lsb/init-functions
+#DISTRO=$(lsb_release -is 2>/dev/null || echo Debian)
+
+running() {
+	if [ -f $PIDFILE ]; then
+		PID=$(cat $PIDFILE)
+		if [ -L "/proc/$PID/exe" ]; then
+			echo y
+		else
+			rm -f $PIDFILE
+		fi
+	fi
+}
+
+case "$1" in
+	start)
+		log_daemon_msg "Starting SingularMS daemon" $NAME
+		RUNNING=$(running)
+		if [ -n "$RUNNING" ]; then
+			log_end_msg 0
+		else
+	
+			if start-stop-daemon -d $BASEPATH --start --exec ${DAEMON} -- start $OPTIONS; then
+			log_end_msg 0
+			else
+			log_end_msg 1
+			fi
+		fi
+	;;
+
+	stop)
+		RUNNING=$(running)
+		log_daemon_msg "Stopping SingularMS daemon" $NAME
+		if [ -n "$RUNNING" ]; then
+			if start-stop-daemon --stop -p $PIDFILE ; then
+			log_end_msg 0
+			else
+			log_end_msg 1
+			fi
+		else
+			log_end_msg 0
+		fi
+	;;
+
+	restart)
+		$0 stop
+		$0 start
+	;;
+	
+	status)
+		RUNNING=$(running)
+		if [ -n "$RUNNING" ]; then
+			log_success_msg "SingularMS is running"
+			exit 0
+		else
+			log_success_msg "SingularMS is not running"
+			exit 3
+		fi
+	;;
+
+	*)
+		log_action_msg "Usage: $0 {start|stop|restart}"
+		exit 1
+	;;
+esac
+
+exit 0

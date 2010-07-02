@@ -1,0 +1,96 @@
+{% extends "base.html" %}
+
+{% comment %}
+
+#######################################################################
+#  SingularMS version 1.0                                             #
+#######################################################################
+#  This file is a part of SingularMS.                                 #
+#                                                                     #
+#  SingularMs is free software; you can copy, modify, and distribute  #
+#  it under the terms of the GNU Affero General Public License        #
+#  Version 1.0, 21 May 2007.                                          #
+#                                                                     #
+#  SingularMS is distributed in the hope that it will be useful, but  #
+#  WITHOUT ANY WARRANTY; without even the implied warranty of         #
+#  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.               #
+#  See the GNU Affero General Public License for more details.        #
+#                                                                     #
+#  You should have received a copy of the GNU Affero General Public   #
+#  License with this program; if not, contact Galotecnia              #
+#  at contacto[AT]galotecnia[DOT]org. If you have questions about the #
+#  GNU Affero General Public License see "Frequently Asked Questions" #
+#  at http://www.gnu.org/licenses/gpl-faq.html                        #
+#######################################################################
+
+{% endcomment %}
+
+{% load pagination_tags %}
+{% load i18n %}
+
+{% block layout %}
+<link rel="stylesheet" type="text/css" media="screen,projection,print" href="{{ MEDIA_URL }}/css/layout2_setup.css" />
+<link rel="stylesheet" type="text/css" media="screen,projection,print" href="{{ MEDIA_URL }}/css/layout2_text.css" />
+{% endblock %}
+
+{% block breadcrumbs %}
+<!-- A.3 HEADER BREADCRUMBS -->
+<!-- Breadcrumbs -->
+<div class="header-breadcrumbs">
+	<ul>
+		<li><a href={% url root %}>{% trans 'Home' %}</a></li>
+		<li><a href="{% url logIndex %}">{% trans 'Log' %}</a></li>
+		{% if priority %}
+			<li><a href="{% url logPriority priority %}">{{ priorityName }}</a></li>
+		{% endif %}
+	</ul>
+</div>
+{% endblock %}
+
+{% block maincontent %}
+	<h1 class="pagetitle">{% trans "LOG" %} {% if priority %} ({{ priorityName }}){% endif %}</h1>
+	{% if object_list %}		
+		{% autopaginate object_list 40 %}
+		{% autoescape off %}	
+			{{ calhtml }}
+		{% endautoescape %}		
+		<table>
+			<tbody>
+				<tr>
+					<td align="center" width="33%">
+						{% paginate %}
+					</td>
+				</tr>				
+			</tbody>						
+		</table>
+		
+		<table>
+			<tbody>
+				<tr>
+					<td align="center" width="33%">
+						{% trans 'Date' %}: {{ date_check }}
+					</td>
+				</tr>				
+			</tbody>						
+		</table>		
+		<table>
+			<tbody>
+				<tr>
+					<th class="top" scope="col" width="25%">{% trans 'Date' %}</th>
+					<th class="top" scope="col" width="10%">{% trans 'Priority' %}</th>
+					<th class="top" scope="col">{% trans 'Message' %}</th>
+				</tr>
+				{% for log in object_list %}
+					<tr>
+						<td>{{log.date|date:"j F Y H:i:s"}}</td>
+						<td>{{log.get_priority_display}}</td>
+						<td>{{log.text|escape }}</td>
+					</tr>
+				{% endfor %}
+			</tbody>
+		</table>		
+	{% else %}
+		<h1 class="block">{% trans "No log messages matched" %}</h1>	
+	{% endif %}
+{% endblock %}
+

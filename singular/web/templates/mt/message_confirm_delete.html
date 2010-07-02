@@ -1,0 +1,138 @@
+{% extends "base.html" %}
+
+{% comment %}
+
+#######################################################################
+#  SingularMS version 1.0                                             #
+#######################################################################
+#  This file is a part of SingularMS.                                 #
+#                                                                     #
+#  SingularMs is free software; you can copy, modify, and distribute  #
+#  it under the terms of the GNU Affero General Public License        #
+#  Version 1.0, 21 May 2007.                                          #
+#                                                                     #
+#  SingularMS is distributed in the hope that it will be useful, but  #
+#  WITHOUT ANY WARRANTY; without even the implied warranty of         #
+#  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.               #
+#  See the GNU Affero General Public License for more details.        #
+#                                                                     #
+#  You should have received a copy of the GNU Affero General Public   #
+#  License with this program; if not, contact Galotecnia              #
+#  at contacto[AT]galotecnia[DOT]org. If you have questions about the #
+#  GNU Affero General Public License see "Frequently Asked Questions" #
+#  at http://www.gnu.org/licenses/gpl-faq.html                        #
+#######################################################################
+
+{% endcomment %}
+
+{% load i18n breadcrumbs display_object%}
+
+{% block jscript %}
+{% include "jqueryui_loader.html" %}
+{% endblock %}
+
+
+{% block maincontent %}
+	<h1 class="pagetitle">{% trans "Message deletion page" %}</h1>
+	{% if object %}
+		<h1 class="block">{% trans "Deleting message: " %} {{ object.id }}</h1>
+		<div class="column1-unit">
+			<h1>{% trans "Are you sure that do you want to delete this message?" %}</h1>
+			<div class="contactform">
+				<form method="post" action="">
+				<fieldset>
+					<legend>{% trans "Message details:" %}</legend>
+					<p><label for="id_creationdate" class="left">{% trans "Creation date: " %}</label>
+                    {% ifequal type 'Individual' %}
+                        {{ object.creationDate }}
+                    {% else %}
+                        {{ object.message.creationDate }}
+                    {% endifequal %}
+					</p>
+                    <p>
+                        <label for="id_processed" class="left">{% trans "Processed: " %}  </label>
+                        {% ifequal type 'Individual' %}
+                            {{ object.processed }}
+                        {% else %}
+                            {{ object.message.processed }}
+                        {% endifequal %}
+                    </p>
+                    <p>
+                        <label for="id_account" class="left">{%trans 'Account: '%} </label>
+                        {% ifequal type 'Individual' %}
+                            {{ object.account }}
+                        {% else %}
+                            {{ object.message.account }}
+                        {% endifequal %}
+                    </p>
+                    <p>
+                    <label for="id_mobile" class="left">{%trans 'Mobile: '%} </label>
+                        {% ifequal type 'Individual' %}
+                            {{ object.mobile }}
+                        {% else %}
+                            {{ object.message.mobile }}
+                        {% endifequal %}
+                    </p>
+
+                    <p>
+                        <label for="id_body" class="left">{%trans 'Body: ' %}</label>
+                        {% ifequal type 'Individual' %}
+                            {{object.body }}
+                        {% else %}
+                            {{object.message.body }}
+                        {% endifequal %}
+                    </p>
+                    <p>
+                        <label for="id_activationDate" class="left">{% trans 'activationDate: ' %}</label>
+                        {% ifequal type 'Individual' %}
+                            {{object.activationDate}}
+                        {% else %}
+                            {{object.message.activationDate}}
+                        {% endifequal %}
+                    </p>
+                    <p>
+                        <label for="id_deactivationDate" class="left">{%trans 'deactivationDate: ' %}</label>
+                        {% ifequal type 'Individual' %}
+                            {{object.deactivationDate}}
+                        {% else %}
+                            {{object.message.deactivationDate}}
+                        {% endifequal %}
+                    </p>
+                    <p>
+                        <label for="id_firstSentDate" class="left"> {% trans 'firstSentDate: ' %}</label>
+                        {% ifequal type 'Individual' %}
+                            {{object.firstSentDate}}
+                        {% else %}
+                            {{object.message.firstSentDate}}
+                        {% endifequal %}
+                    </p>
+                    <p>
+                        <label for="id_lastSentDate" class="left">{% trans 'lastSentDate: ' %}</label>
+                        {% ifequal type 'Individual' %}
+                            {{object.lastSentDate}}
+                        {% else %}
+                            {{object.message.lastSentDate}}
+                        {% endifequal %}
+                    </p>
+
+					<p><input name="submit" id="submit" class="button"
+						value= {% trans "Delete" %} 
+						tabindex="6" type="submit"/>
+					</p>
+				</fieldset>
+				</form>
+			</div>
+		</div>
+	{% else %}
+		<h1 class="block"> {% trans "Channel not found" %} </h1>	
+		<div class="column1-unit">
+			<h1>{% trans "Selected channel doesn't exist" %}</h1>
+			<p>
+			{% blocktrans %}
+				Error: SingularMS didn't found the objects that you have
+				requested, please contact with your system administrator.
+			{% endblocktrans %}
+			</p>
+		</div>
+	{% endif %}
+{% endblock %}

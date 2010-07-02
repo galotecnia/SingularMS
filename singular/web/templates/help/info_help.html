@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% comment %}
+
+#######################################################################
+#  SingularMS version 1.0                                             #
+#######################################################################
+#  This file is a part of SingularMS.                                 #
+#                                                                     #
+#  SingularMs is free software; you can copy, modify, and distribute  #
+#  it under the terms of the GNU Affero General Public License        #
+#  Version 1.0, 21 May 2007.                                          #
+#                                                                     #
+#  SingularMS is distributed in the hope that it will be useful, but  #
+#  WITHOUT ANY WARRANTY; without even the implied warranty of         #
+#  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.               #
+#  See the GNU Affero General Public License for more details.        #
+#                                                                     #
+#  You should have received a copy of the GNU Affero General Public   #
+#  License with this program; if not, contact Galotecnia              #
+#  at contacto[AT]galotecnia[DOT]org. If you have questions about the #
+#  GNU Affero General Public License see "Frequently Asked Questions" #
+#  at http://www.gnu.org/licenses/gpl-faq.html                        #
+#######################################################################
+
+{% endcomment %}
+
+{% block layout %}
+<link rel="stylesheet" type="text/css" media="screen,projection,print" href="{{ MEDIA_URL }}/css/layout1_setup.css" />
+<link rel="stylesheet" type="text/css" media="screen,projection,print" href="{{ MEDIA_URL }}/css/layout1_text.css" />
+{% endblock %}
+
+
+{% block breadcrumbs %}
+{% endblock %}
+
+{% block leftmenu%}
+{% endblock %}
+
+{% block maincontent %}
+<div class="column1-unit">
+    <h1> Listas mensajes salientes y canales </h1>
+    <p> En la sección de envío de la plataforma se pueden ver dos listas diferentes: una de listas de mensajes y otra de canales.</p>
+    <p> Cada una de esas listas está accesible mediante una entrada del menú propia. Dentro de la página correspondiente a cada
+    una de esas listas, se podrá acceder mediante al menú izquierdo a varias opciones: crear uno nuevo, verlos todos, y otras opciones
+    propias de esa sección. </p>
+    <p> El aspecto de la lista de mensajes es el siguiente: </p>
+<img class="fullwidth" src="{{MEDIA_URL}}/img/msgList.png" />
+    <p> El aspecto de la lista de canales es el siguiente: </p>
+<img class="fullwidth" src="{{MEDIA_URL}}/img/channelList.png" />
+</div>
+{% endblock %}
+
+{% block rightmenu%}
+{% endblock %}
+
