@@ -92,7 +92,7 @@ MIDDLEWARE_CLASSES = (
     'pagination.middleware.PaginationMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.middleware.csrf.CsrfResponseMiddleware',
-    'galotecnia_support.GalotecniaSupport',
+    'email_support.EmailSupport',
 )
 
 ROOT_URLCONF = 'urls'

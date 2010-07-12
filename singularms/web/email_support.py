@@ -27,10 +27,10 @@ from django.conf import settings
 import datetime
 import socket
 
-class GalotecniaSupport:
+class EmailSupport:
 
-    para = ['you@yourdomain',]
-    de = 'singularms@yourdomain'
+    para = ['you@your-domain.com',]
+    de = 'support-singularms@your-domain.com'
 
     def process_exception(self, request, exception, environ = None, subject = "", **args):
         import traceback

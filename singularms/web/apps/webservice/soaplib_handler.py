@@ -36,7 +36,7 @@ import logging
 from xml.etree import ElementTree
 from soaplib.soap import make_soap_fault
 
-from galotecnia_support import GalotecniaSupport
+from email_support import EmailSupport
 
 log = logging.getLogger('galotecnia')
  
@@ -99,7 +99,7 @@ class DjangoSoapApp(SimpleWSGISoapApp):
     def onWsdlException(self, environ, exc, resp):
         super(DjangoSoapApp, self).onWsdlException(environ, exc, resp)
         log.error("Excepcion in SingularMS wsdl soaplib: %s", exc)
-        g = GalotecniaSupport()
+        g = EmailSupport()
         g.process_exception({}, exc, environ = environ, subject = "Exception in SingularMS wsdl generation", resp=resp) 
         # correo_excepcion("Exception in SingularMS wsdl generation", exc, environ, resp=resp)
         return resp
@@ -108,7 +108,7 @@ class DjangoSoapApp(SimpleWSGISoapApp):
     def onException(self, environ, exc, resp):
         super(DjangoSoapApp, self).onException(environ, exc, resp)
         log.error("Excepcion in SingularMS soaplib: %s", exc)
-        g = GalotecniaSupport()
+        g = EmailSupport()
         g.process_exception({}, exc, environ = environ, subject = "Exception in SingularMS webservice soap library", resp=resp) 
         # correo_excepcion("Excepcion in SingularMS webservice soap library", exc, environ, resp=resp)
         return resp
