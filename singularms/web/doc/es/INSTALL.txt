@@ -1,10 +1,9 @@
-***************************
-*** GUIA DE INSTALACIÓN ***
-***************************
-
-Autor: Juan Carlos Castillo Cano <juancarlos@galotecnia.com>
-Galotecnia, R.S.S. <info@galotecnia.com>
-
+****************************************************************
+********************* GUIA DE INSTALACIÓN **********************
+****************************************************************
+* Autor: Juan Carlos Castillo Cano <juancarlos@galotecnia.com> *
+* Galotecnia, R.S.S. <info@galotecnia.com>                     *
+****************************************************************
 
 INTRODUCCIÓN
 
